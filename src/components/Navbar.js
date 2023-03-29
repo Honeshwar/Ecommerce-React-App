@@ -1,18 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "../styles/navbar.module.css";
 function Navbar() {
   return (
     <div className="navbar-component">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             eCommerce
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarText"
+            data-bs-target="/navbarText"
             aria-controls="navbarText"
             aria-expanded="false"
             aria-label="Toggle navigation"
@@ -22,22 +24,26 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/products"
+                >
                   Products
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Add TO Products{" "}
+                <Link className="nav-link" to="/add-a-product">
+                  Add a Product{" "}
                   <img
                     style={{ width: "20px", height: "20px" }}
                     src="https://cdn-icons-png.flaticon.com/512/8371/8371357.png"
                     alt="add product photo"
                   />{" "}
-                </a>
+                </Link>
               </li>
             </ul>
-            <a className="navbar-text nav-link" href="#">
+            <Link className="navbar-text nav-link" to="/profile">
               john Deo
               <img
                 style={{
@@ -50,7 +56,7 @@ function Navbar() {
                 src="https://cdn-icons-png.flaticon.com/128/9775/9775776.png"
                 alt="add product photo"
               />
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

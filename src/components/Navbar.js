@@ -7,7 +7,11 @@ function Navbar() {
     <div className="navbar-component">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link
+            style={{ color: "green", fontSize: "1.5rem" }}
+            className="navbar-brand"
+            to="/"
+          >
             eCommerce
           </Link>
           <button

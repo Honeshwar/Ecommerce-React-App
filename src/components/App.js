@@ -31,7 +31,10 @@ function App() {
         second reason , i not write comp inside routes because we don't need that on each routing navbar comp load again (vdom) */}
         <Routes>
           {/*it help in finding exact path/url by default */}
-          <Route path="/" element={<Products products={products} />}></Route>
+          <Route
+            path="/"
+            element={<Products products={products} setProducts={setProducts} />}
+          ></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

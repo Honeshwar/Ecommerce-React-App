@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SortBy from "../components/SortBy";
 import styles from "../styles/products.module.css";
 
-function Products({ products }) {
+function Products({ products, setProducts }) {
+  const [sortedProducts, setSortedProducts] = useState(products);
+  const [sorted, setSorted] = useState(false);
+
+  const PRODUCTS = sorted ? sortedProducts : products;
+  console.log(PRODUCTS);
   return (
     <div className={styles.products}>
-      <SortBy />
+      <SortBy
+        products={products}
+        setSortedProducts={setSortedProducts}
+        setSorted={setSorted}
+        sorted={sorted}
+      />
       <div className={styles.listOfProducts}>
-        {products?.map((product, index) => (
+        {PRODUCTS?.map((product, index) => (
           <div
             className="card"
             style={{

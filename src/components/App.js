@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../styles/index.css";
+import Products from "../pages/Products";
 
 function Error() {
   return <div>Error 404</div>;
@@ -18,7 +19,7 @@ function App() {
         second reason , i not write comp inside routes because we don't need that on each routing navbar comp load again (vdom) */}
         <Routes>
           {/*it help in finding exact path/url by default */}
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Products />}></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

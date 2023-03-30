@@ -3,18 +3,9 @@ import { Link } from "react-router-dom";
 import SortBy from "../components/SortBy";
 import styles from "../styles/products.module.css";
 
-function Products() {
+function Products({ products }) {
   console.log("props", products);
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    //do fetch products on mounted and use useState to re ender comp with get products
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setProducts(json.products);
-      });
-  }, []);
+
   const [sortedProducts, setSortedProducts] = useState(products);
   const [sorted, setSorted] = useState(false);
 

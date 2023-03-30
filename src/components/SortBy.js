@@ -6,6 +6,7 @@ function SortBy({ products, setSortedProducts, sorted, setSorted }) {
     //   setSorting(true);
     if (sorted) {
       setSorted(false);
+      //convert sort array to  un-sort array,re-render that props ar not pass again in products comp,only pass when execute code app to products
       const sortedProducts = products.sort(function (a, b) {
         return a.id - b.id;
       });

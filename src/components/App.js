@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import "../styles/index.css";
 import Products from "../pages/Products";
 import AddProduct from "../pages/AddProduct";
+import { getAllProducts } from "../api";
 
 function Error() {
   return <div>Error 404</div>;
@@ -15,14 +16,17 @@ function App() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     //do fetch products on mounted and use useState to re ender comp with get products
-    fetch(
-      "https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/products"
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        setProducts(json.products);
-      });
+    //by default useEffect is synchronous in nature but api call is synchro so to make useEffect asynchronous we use async await
+    const getProducts = async () => {
+      const response = await getAllProducts(); //it wait until promise get full-filled and when it get full-filled than it promise return an object
+      console.log("response", response);
+      if (response.success) {
+        setProducts(response.products);
+        return;
+      }
+      console.log("error while api call", response.message);
+    };
+    getProducts();
   }, []);
 
   return (

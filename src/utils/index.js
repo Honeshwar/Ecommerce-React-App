@@ -1,12 +1,8 @@
 const API_URLS = {
-  getProducts:
-    "https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/products", //get
-  deleteProduct: (id) =>
-    `https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/products/${id}`, //delete
-  updateProduct: (id) =>
-    `https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/products/${id}`, //put,patch(single value update )
-  addProduct:
-    "https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/products", //method=post
+  getProducts: "http://localhost:3004/products?_start=0&_limit=100", //get
+  deleteProduct: (id) => `http://localhost:3004/products/${id}`, //delete
+  updateProduct: (id) => `http://localhost:3004/products/${id}`, //put,patch(single value update )
+  addProduct: "http://localhost:3004/products", //method=post
 };
 
 export default API_URLS;

@@ -38,10 +38,10 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/add-a-product">
-                  Add a Product{" "}
+                  Cart
                   <img
                     style={{ width: "20px", height: "20px" }}
-                    src="https://cdn-icons-png.flaticon.com/512/8371/8371357.png"
+                    src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
                     alt="add product photo"
                   />{" "}
                 </Link>

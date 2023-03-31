@@ -1,27 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../styles/products.module.css";
+import {
+  sortProductsByPrice,
+  unSortProducts,
+} from "../state-management/action";
+// import { connect } from "react-redux";
 
-function SortBy({ products, setSortedProducts, sorted, setSorted }) {
+function SortBy({ dispatch, sorted }) {
+  console.log("sorted", sorted);
   const sortByPriceHandler = () => {
     //   setSorting(true);
     if (sorted) {
-      setSorted(false);
-      //convert sort array to  un-sort array,re-render that props ar not pass again in products comp,only pass when execute code app to products
-      const sortedProducts = products.sort(function (a, b) {
-        return a.id - b.id;
-      });
-      console.log("unsort", sortedProducts);
-      setSortedProducts(sortedProducts);
+      dispatch(unSortProducts()); //get action obj--call dispatch--MW--reducer call by store ,store pass action ,current state in reducer
       return;
     }
-
-    const sortedProducts = products.sort(function (a, b) {
-      return a.price - b.price;
-    });
-    console.log(sortedProducts);
-    setSortedProducts(sortedProducts);
-
-    setSorted(true);
+    //if not sorted,than do sort
+    dispatch(sortProductsByPrice());
   };
   return (
     <div className={styles.sortBy}>

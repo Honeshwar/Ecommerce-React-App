@@ -17,7 +17,7 @@ const customFetch = async function (url, { body, ...config }) {
   const headers = {
     "Content-type": "application/json; charset=UTF-8",
   };
-  body = JSON.stringify(body);
+  // body = JSON.stringify(body);
   const configuration = {
     ...config,
     body, // body:body,
@@ -73,8 +73,9 @@ const updateProduct = (productId, product) => {
 };
 
 const deleteProduct = (productId) => {
+  console.log("url", API_URLS.deleteProduct(productId));
   return customFetch(API_URLS.deleteProduct(productId), {
-    method: "Delete",
+    method: "DELETE",
   });
 };
 

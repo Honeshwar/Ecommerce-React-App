@@ -53,6 +53,9 @@ function Details({ products, cart, dispatch }) {
   //delete
   const deleteProductHandler = () => {
     dispatch(deleteProductFromApiAndReduxStore(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
+    success("Successfully Remove Product From Redux Store", {
+      title: "Remove Product Redux Store",
+    });
   };
 
   //add to cart
@@ -91,9 +94,10 @@ function Details({ products, cart, dispatch }) {
         height: "86%",
         display: "flex",
         flexDirection: "column",
-        marginTop: "10px",
         alignItems: "center",
+        justifyContent: "center",
 
+        marginTop: "10px",
         marginBottom: "30px",
         backgroundImage: `${product?.thumbnail}`,
         backgroundColor: "lightgray",
@@ -107,7 +111,7 @@ function Details({ products, cart, dispatch }) {
             width: "80%",
             height: "100%",
             marginBottom: "10px",
-            boxShadow: " 0 0 2px 1px black",
+            boxShadow: " 0 0 2px 1px white",
             borderRadius: "20px",
             marginTop: "15px",
             padding: "20px",
@@ -115,6 +119,7 @@ function Details({ products, cart, dispatch }) {
             flexDirection: "column",
             justifyContent: "space-evenly",
             backgroundColor: "white",
+            backgroundColor: "aliceblue",
           }}
         >
           <Link
@@ -162,7 +167,7 @@ function Details({ products, cart, dispatch }) {
               )}
             </p>
           </div>
-          <ul className="list-group list-group-flush">
+          <ul className="list-group ">
             <li className="list-group-item ">
               Price:
               <small style={{ color: "red" }}>
@@ -340,7 +345,12 @@ function Details({ products, cart, dispatch }) {
           </div>
         </div>
       ) : (
-        "product is comming...."
+        <>
+          <h3>Product Is Removed...</h3>
+          <Link to="/" className="btn btn-primary">
+            Go Back To Home
+          </Link>
+        </>
       )}
     </div>
   );

@@ -44,15 +44,15 @@ const customFetch = async function (url, { body, ...config }) {
 };
 
 //CRUD OPERATION
-const post = (to, product) => {
-  return customFetch(API_URLS.POST(to), {
+const post = (from, product) => {
+  return customFetch(API_URLS.POST(from), {
     method: "POST",
     body: product,
   });
 };
 
-const get = (to) => {
-  return customFetch(API_URLS.GET(to), {
+const get = (from) => {
+  return customFetch(API_URLS.GET(from), {
     //return an promise ,when promise full-filled than ,then() get called
     method: "GET",
   });
@@ -66,16 +66,16 @@ const get = (to) => {
   // });
 };
 
-const update = (to, productId, product) => {
-  return customFetch(API_URLS.UPDATE(to, productId), {
-    method: "PUT",
+const update = (from, productId, product) => {
+  return customFetch(API_URLS.UPDATE(from, productId), {
+    method: "PATCH",
     body: product,
   });
 };
 
-const remove = (to, productId) => {
-  console.log("url", API_URLS.DELETE(to, productId));
-  return customFetch(API_URLS.DELETE(to, productId), {
+const remove = (from, productId) => {
+  console.log("url", API_URLS.DELETE(from, productId));
+  return customFetch(API_URLS.DELETE(from, productId), {
     method: "DELETE",
   });
 };

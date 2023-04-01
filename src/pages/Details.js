@@ -13,8 +13,16 @@ import {
 import { connect } from "react-redux";
 
 function Details({ products, cart, dispatch }) {
-  const [isEdit, setIsEdit] = useState(false);
   const { productId } = useParams();
+
+  //loosely type language JS var a=1,a="das",a=false,a=33.3,.....,on run time js compiler define type and allocate that type storage to variable
+  const [isEdit, setIsEdit] = useState(false);
+  const [title, setTitle] = useState("No Title");
+  const [description, setDescription] = useState("No Description");
+  const [price, setPrice] = useState("No price");
+  const [rating, setRating] = useState("No Rating");
+
+  ////////////
 
   useEffect(() => {
     if (localStorage.getItem("state")) {
@@ -36,7 +44,11 @@ function Details({ products, cart, dispatch }) {
   //   console.log("local storage", JSON.parse(localStorage.getItem("state")));
 
   let { allProducts } = products;
-  console.log("connect", products, cart);
+  console.log(
+    "connect give your newly state on each state change",
+    products,
+    cart
+  );
 
   const findProduct = allProducts?.filter((e) => e.id == productId);
   let product;
@@ -49,6 +61,14 @@ function Details({ products, cart, dispatch }) {
   let index = cart.cartProducts?.filter((product) => product.id == productId);
   console.log(index);
   index = index.length;
+
+  //set up state value if it is not set up yet
+  if (title === "No Title" && product) {
+    setTitle(product?.title);
+    setDescription(product?.description);
+    setPrice(product?.price);
+    setRating(product?.rating);
+  }
 
   //delete
   const deleteProductHandler = () => {
@@ -75,8 +95,25 @@ function Details({ products, cart, dispatch }) {
   };
 
   //edit/update
-  const editHandler = () => {
-    dispatch(editProduct(product)); //edit Product In Api And Redux Store Handler
+  //   const editHandler = () => {
+  //     dispatch(editProduct(product)); //edit Product In Api And Redux Store Handler
+  //   };
+
+  const saveEditHandler = () => {
+    //no need to stringify because we done at custom fetch func,(api call)
+    const UpdatedProduct = {
+      //   id: product.id,
+      title,
+      description,
+      price,
+      rating,
+      //   thumbnail: "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+    };
+    console.log("edited/updated product ", UpdatedProduct);
+    dispatch(editProduct(product.id, UpdatedProduct)); //edit Product In Api And Redux Store Handler
+    success("Successfully update Product ", {
+      title: "UPDATE",
+    });
   };
 
   //   const deleteProduct = async () => {
@@ -98,9 +135,9 @@ function Details({ products, cart, dispatch }) {
         justifyContent: "center",
 
         marginTop: "10px",
-        marginBottom: "30px",
+        // marginBottom: "30px",
         backgroundImage: `${product?.thumbnail}`,
-        backgroundColor: "lightgray",
+        backgroundColor: "cadetblue",
       }}
     >
       {product ? (
@@ -114,7 +151,9 @@ function Details({ products, cart, dispatch }) {
             boxShadow: " 0 0 2px 1px white",
             borderRadius: "20px",
             marginTop: "15px",
-            padding: "20px",
+            padding: "10px",
+            paddingTop: "10px",
+            paddingBottom: "10px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-evenly",
@@ -143,11 +182,15 @@ function Details({ products, cart, dispatch }) {
               {!isEdit ? (
                 `${product?.title}`
               ) : (
-                <input
-                  type="text"
-                  style={{ outline: "none" }}
-                  value={product?.title}
-                />
+                <>
+                  {`Title : `}{" "}
+                  <input
+                    type="text"
+                    style={{ outline: "none" }}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </>
               )}
             </h5>
             <p
@@ -157,13 +200,20 @@ function Details({ products, cart, dispatch }) {
               {!isEdit ? (
                 `${product?.description}`
               ) : (
-                <textarea
-                  cols="30"
-                  rows={5}
-                  type="text"
-                  style={{ outline: "none" }}
-                  value={product?.description}
-                />
+                <>
+                  <textarea
+                    cols="50"
+                    rows={3}
+                    type="text"
+                    style={{ outline: "none" }}
+                    // defaultValue={product?.description}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                  <span
+                    style={{ color: "black", fontSize: "1.2rem" }}
+                  >{`   (description ) `}</span>
+                </>
               )}
             </p>
           </div>
@@ -178,7 +228,9 @@ function Details({ products, cart, dispatch }) {
                   <input
                     type="number"
                     style={{ outline: "none" }}
-                    value={product?.price}
+                    // defaultValue={product?.price}
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                   />
                 )}
               </small>
@@ -187,12 +239,17 @@ function Details({ products, cart, dispatch }) {
               Rating:
               <small className="" style={{ color: "yellowgreen" }}>
                 {!isEdit ? (
-                  `${product?.rating}`
+                  `  ${product?.rating}/5 `
                 ) : (
                   <input
                     type="number"
                     style={{ outline: "none" }}
-                    value={`${product?.rating}/5`}
+                    // value={`${product?.rating}`}
+                    // defaultValue={product?.rating}
+                    max={5}
+                    min={0}
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
                   />
                 )}
               </small>
@@ -211,33 +268,35 @@ function Details({ products, cart, dispatch }) {
               <>
                 {" "}
                 <a
-                  href={`/productDetail/edit/${product?.id}`}
+                  onClick={saveEditHandler}
                   className="card-link"
                   style={{
                     textDecoration: "none",
                     color: "black",
                     cursor: "pointer",
+                    marginLeft: "10px",
                   }}
                 >
-                  Save
+                  {` Save `}
                   <img
-                    style={{ width: "20px", height: "20px", marginLeft: "0px" }}
+                    style={{ width: "25px", height: "25px", marginLeft: "0px" }}
                     src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
                     alt="edit product details"
                   />
                 </a>
                 <a
-                  href={`/productDetail/delete/${product?.id}`}
+                  onClick={() => setIsEdit(false)}
                   className="card-link"
                   style={{
                     textDecoration: "none",
                     color: "black",
                     cursor: "pointer",
+                    marginRight: "10px",
                   }}
                 >
                   Cancel
                   <img
-                    style={{ width: "30px", height: "30px", marginLeft: "0px" }}
+                    style={{ width: "35px", height: "35px", marginLeft: "0px" }}
                     src="https://cdn-icons-png.flaticon.com/128/10174/10174029.png"
                     alt="delete product"
                   />
@@ -299,7 +358,7 @@ function Details({ products, cart, dispatch }) {
                   }}
                 >
                   <a
-                    onClick={editHandler}
+                    onClick={() => setIsEdit(true)}
                     className="card-link"
                     style={{
                       textDecoration: "none",
@@ -364,6 +423,7 @@ function mapStateToProps(state, ownProps) {
 }
 function mapDispatchToProps(dispatch) {
   // console.log("disp", a);
+
   return {
     dispatch,
   };

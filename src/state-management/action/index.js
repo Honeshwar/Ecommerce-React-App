@@ -8,6 +8,8 @@ export const ADD_PRODUCT_TO_STORE = "ADD_PRODUCT_TO_STORE";
 export const SORT_PRODUCTS_BY_PRICE = "SORT_PRODUCTS_BY_PRICE";
 export const UN_SORT_PRODUCTS_TO_NORMAL = "UN_SORT_PRODUCTS_TO_NORMAL";
 export const DELETE_PRODUCT_FROM_STORE = "DELETE_PRODUCT_FROM_STORE";
+export const UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS =
+  "UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_CART_TO_STORE = "ADD_CART_TO_STORE";
@@ -102,7 +104,25 @@ export function AddProductToCartInReduxStore(product) {
   };
 }
 
-export function editProduct() {}
+export function editProduct(productId, product) {
+  return async function (dispatch) {
+    const response = await update("products", productId, product);
+    if (response.success) {
+      console.log("API response after edit/update", response);
+      dispatch(editProductInReduxStore(response.products));
+      return;
+    }
+    console.log("add cart api error", response.message);
+  };
+}
+
+export function editProductInReduxStore(product) {
+  console.log("edit to redux store");
+  return {
+    type: UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
+    product,
+  };
+}
 
 // cart .........................
 export function getProductAndCart() {

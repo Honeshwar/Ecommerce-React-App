@@ -13,6 +13,7 @@ import {
   SORT_PRODUCTS_BY_PRICE,
   UN_SORT_CART_TO_NORMAL,
   UN_SORT_PRODUCTS_TO_NORMAL,
+  UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
 } from "../action";
 
 //pure function are responsible for only for output based on arguments
@@ -62,6 +63,18 @@ function products(state = initialProductState, action) {
         ...state,
         allProducts: [...action.allProducts],
         cartSorted: false,
+      };
+    case UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS:
+      const Products = state.allProducts.map((element) => {
+        if (element.id === action.product.id) {
+          return action.product;
+        }
+        return element;
+      });
+
+      return {
+        ...state,
+        allProducts: Products,
       };
 
     default:

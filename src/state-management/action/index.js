@@ -8,10 +8,12 @@ export const ADD_PRODUCT_TO_STORE = "ADD_PRODUCT_TO_STORE";
 export const SORT_PRODUCTS_BY_PRICE = "SORT_PRODUCTS_BY_PRICE";
 export const UN_SORT_PRODUCTS_TO_NORMAL = "UN_SORT_PRODUCTS_TO_NORMAL";
 export const DELETE_PRODUCT_FROM_STORE = "DELETE_PRODUCT_FROM_STORE";
+
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_CART_TO_STORE = "ADD_CART_TO_STORE";
 export const SORT_CART_BY_PRICE = "SORT_CART_BY_PRICE";
 export const UN_SORT_CART_TO_NORMAL = "UN_SORT_CART_TO_NORMAL";
+export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART";
 
 //action creators
 
@@ -103,21 +105,33 @@ export function AddProductToCartInReduxStore(product) {
 export function editProduct() {}
 
 // cart .........................
-export function getCart() {
+export function getProductAndCart() {
   return async function (dispatch) {
-    const response = await get("cart");
-    if (response.success) {
-      console.log("add to cart api", response);
-      dispatch(addCartToStore(response.products)); //response={success,products:[]},create in api return custom fetch,api res={cart:[]}
+    const response1 = await get("products");
+    const response2 = await get("cart");
+    if (response1.success && response2.success) {
+      console.log(
+        "get products and cart  from api *********",
+        response1,
+        response2
+      );
+      dispatch(
+        addProductsAndCartToStore(response1.products, response2.products)
+      ); //response={success,products:[]},create in api return custom fetch,api res={cart:[]}
       return;
     }
-    console.log("add cart api error", response.message);
+    console.log(
+      "get products and cart api error",
+      response1.message,
+      response2.message
+    );
   };
 }
 
-export function addCartToStore(cartProducts) {
+export function addProductsAndCartToStore(allProducts, cartProducts) {
   return {
     type: ADD_CART_TO_STORE,
+    allProducts,
     cartProducts,
   };
 }
@@ -133,5 +147,25 @@ export function sortCartByPrice() {
 export function unSortCart() {
   return {
     type: UN_SORT_CART_TO_NORMAL,
+  };
+}
+
+export function removeProductFromCart(productId) {
+  // remove in api + store
+  return async function (dispatch) {
+    const response = await remove("cart", productId);
+    if (response.success) {
+      console.log("add to cart api", response);
+      dispatch(removeProductFromCartInStore(productId)); //response={success,products:[]},create in api return custom fetch,api res={cart:[]}
+      return;
+    }
+    console.log("add cart api error", response.message);
+  };
+}
+
+export function removeProductFromCartInStore(productId) {
+  return {
+    type: REMOVE_PRODUCT_FROM_CART,
+    productId,
   };
 }

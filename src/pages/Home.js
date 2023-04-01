@@ -3,24 +3,13 @@ import { connect } from "react-redux";
 
 import { SortBy, Product } from "../components";
 import styles from "../styles/home.module.css";
-import { addProductsHandler } from "../state-management/action";
+import {
+  addProductsHandler,
+  getProductAndCart,
+} from "../state-management/action";
 
 function Home({ products, dispatch }) {
-  // console.log("props", products);
-
-  // const [sortedProducts, setSortedProducts] = useState(products);
-  // const [sorted, setSorted] = useState(false);
-  // const [dProduct, setDProduct] = useState(products);
-
-  // const PRODUCTS = sorted ? sortedProducts : products; // dProduct;
-  //   console.log(PRODUCTS);
-
   const { allProducts, productsSorted } = products;
-  window.localStorage.setItem("allProducts", JSON.stringify(allProducts));
-  useEffect(() => {
-    dispatch(addProductsHandler());
-    // console.log("add products to stor", products);
-  }, []);
 
   return (
     <div className={styles.products}>
@@ -33,12 +22,12 @@ function Home({ products, dispatch }) {
     </div>
   );
 }
-
 function mapStateToProps(state, ownProps) {
   return {
     // products: state?.products,
     // sorted: state?.sorted,
     products: state?.products,
+    cart: state?.cart,
   };
 }
 function mapDispatchToProps(dispatch) {

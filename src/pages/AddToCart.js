@@ -7,9 +7,9 @@ import { getCart } from "../state-management/action";
 
 function AddToCart({ cart, dispatch }) {
   const { cartProducts, cartSorted } = cart;
-  useEffect(() => {
-    dispatch(getCart());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCart());
+  // }, []);
 
   return (
     <div className={styles.products}>

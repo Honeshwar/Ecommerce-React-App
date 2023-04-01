@@ -8,6 +8,7 @@ import {
   ADD_PRODUCT_TO_STORE,
   ADD_TO_CART,
   DELETE_PRODUCT_FROM_STORE,
+  REMOVE_PRODUCT_FROM_CART,
   SORT_CART_BY_PRICE,
   SORT_PRODUCTS_BY_PRICE,
   UN_SORT_CART_TO_NORMAL,
@@ -56,6 +57,12 @@ function products(state = initialProductState, action) {
         allProducts,
         productsSorted: false,
       };
+    case ADD_CART_TO_STORE: //cart and products
+      return {
+        ...state,
+        allProducts: [...action.allProducts],
+        cartSorted: false,
+      };
 
     default:
       return {
@@ -73,12 +80,6 @@ const initialCartState = {
 //reducer responsible for state change/state return
 function cart(state = initialCartState, action) {
   switch (action.type) {
-    case ADD_TO_CART:
-      return {
-        ...state,
-        cartProducts: [action.product, ...state.cartProducts],
-        cartSorted: false,
-      };
     case ADD_CART_TO_STORE:
       return {
         ...state,
@@ -103,7 +104,21 @@ function cart(state = initialCartState, action) {
         cartProducts: unSortedCart,
         cartSorted: false,
       };
-
+    case ADD_TO_CART:
+      return {
+        ...state,
+        cartProducts: [action.product, ...state.cartProducts],
+        cartSorted: false,
+      };
+    case REMOVE_PRODUCT_FROM_CART:
+      const cartProducts = state.cartProducts.filter(
+        (e) => e.id !== action.productId
+      );
+      return {
+        ...state,
+        cartProducts,
+        cartSorted: false,
+      };
     default:
       return {
         ...state,

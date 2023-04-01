@@ -1,29 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { success, error } from "react-toast-notification";
+
 import {
   deleteProductFromApiAndReduxStore,
   AddProductToCart,
   editProduct,
+  removeProductFromCart,
+  getProductAndCart,
+  addProductsAndCartToStore,
 } from "../state-management/action";
 import { connect } from "react-redux";
 
-function Details({ products, dispatch }) {
+function Details({ products, cart, dispatch }) {
+  const [isEdit, setIsEdit] = useState(false);
   const { productId } = useParams();
+
+  useEffect(() => {
+    if (localStorage.getItem("state")) {
+      const state = JSON.parse(localStorage.getItem("state"));
+      console.log("local storage", state);
+      dispatch(
+        addProductsAndCartToStore(
+          state.products?.allProducts,
+          state.cart?.cartProducts
+        )
+      );
+      return;
+    }
+
+    dispatch(getProductAndCart());
+  }, []);
+
   console.log("product id", productId);
-  console.log("local storage", JSON.parse(localStorage.getItem("allProducts")));
+  //   console.log("local storage", JSON.parse(localStorage.getItem("state")));
 
   let { allProducts } = products;
-  if (!allProducts) {
-    allProducts = JSON.parse(localStorage.getItem("allProducts"));
-  }
-  console.log(allProducts, products);
-  const findProduct = allProducts.filter((e) => e.id == productId);
+  console.log("connect", products, cart);
+
+  const findProduct = allProducts?.filter((e) => e.id == productId);
   let product;
-  if (findProduct.length === 1) {
+  if (findProduct?.length === 1) {
     product = findProduct[0];
   }
-  console.log(findProduct);
-  const [isEdit, setIsEdit] = useState(false);
+  console.log("got product in all product", findProduct);
+
+  //cart
+  let index = cart.cartProducts?.filter((product) => product.id == productId);
+  console.log(index);
+  index = index.length;
 
   //delete
   const deleteProductHandler = () => {
@@ -33,6 +58,17 @@ function Details({ products, dispatch }) {
   //add to cart
   const AddToCartHandler = () => {
     dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
+    success("Successfully Added Product To Cart", {
+      title: "Add TO Cart",
+    });
+  };
+
+  //remove to cart
+  const RemoveProductToCartHandler = () => {
+    dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
+    success("Successfully Remove Product From  Cart", {
+      title: "Remove Product From  Cart",
+    });
   };
 
   //edit/update
@@ -59,7 +95,7 @@ function Details({ products, dispatch }) {
         alignItems: "center",
 
         marginBottom: "30px",
-        backgroundImage: `${product.thumbnail}`,
+        backgroundImage: `${product?.thumbnail}`,
         backgroundColor: "lightgray",
       }}
     >
@@ -82,7 +118,7 @@ function Details({ products, dispatch }) {
           }}
         >
           <Link
-            to={`/productDetail/${product.id}`}
+            to={`/productDetail/${product?.id}`}
             style={{
               display: "flex",
 
@@ -100,12 +136,12 @@ function Details({ products, dispatch }) {
           <div className="" style={{ marginTop: "20px", marginBottom: "10px" }}>
             <h5 className="card-title">
               {!isEdit ? (
-                `${product.title}`
+                `${product?.title}`
               ) : (
                 <input
                   type="text"
                   style={{ outline: "none" }}
-                  value={product.title}
+                  value={product?.title}
                 />
               )}
             </h5>
@@ -114,14 +150,14 @@ function Details({ products, dispatch }) {
               style={{ color: "gray", marginTop: "10px" }}
             >
               {!isEdit ? (
-                `${product.description}`
+                `${product?.description}`
               ) : (
                 <textarea
                   cols="30"
                   rows={5}
                   type="text"
                   style={{ outline: "none" }}
-                  value={product.description}
+                  value={product?.description}
                 />
               )}
             </p>
@@ -132,12 +168,12 @@ function Details({ products, dispatch }) {
               <small style={{ color: "red" }}>
                 {" Rs "}{" "}
                 {!isEdit ? (
-                  `${product.price}`
+                  `${product?.price}`
                 ) : (
                   <input
                     type="number"
                     style={{ outline: "none" }}
-                    value={product.price}
+                    value={product?.price}
                   />
                 )}
               </small>
@@ -146,12 +182,12 @@ function Details({ products, dispatch }) {
               Rating:
               <small className="" style={{ color: "yellowgreen" }}>
                 {!isEdit ? (
-                  `${product.rating}`
+                  `${product?.rating}`
                 ) : (
                   <input
                     type="number"
                     style={{ outline: "none" }}
-                    value={`${product.rating}/5`}
+                    value={`${product?.rating}/5`}
                   />
                 )}
               </small>
@@ -170,7 +206,7 @@ function Details({ products, dispatch }) {
               <>
                 {" "}
                 <a
-                  href={`/productDetail/edit/${product.id}`}
+                  href={`/productDetail/edit/${product?.id}`}
                   className="card-link"
                   style={{
                     textDecoration: "none",
@@ -186,7 +222,7 @@ function Details({ products, dispatch }) {
                   />
                 </a>
                 <a
-                  href={`/productDetail/delete/${product.id}`}
+                  href={`/productDetail/delete/${product?.id}`}
                   className="card-link"
                   style={{
                     textDecoration: "none",
@@ -204,28 +240,51 @@ function Details({ products, dispatch }) {
               </>
             ) : (
               <>
-                <a
-                  onClick={AddToCartHandler}
-                  className="card-link"
-                  style={{
-                    textDecoration: "none",
-                    color: "black",
-                    marginRight: "5px",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img
+                {index === 0 ? (
+                  <a
+                    onClick={AddToCartHandler}
+                    className="card-link"
                     style={{
-                      width: "30px",
-                      height: "30px",
-                      marginLeft: "0px",
+                      textDecoration: "none",
+                      color: "black",
+                      marginRight: "5px",
+                      cursor: "pointer",
                     }}
-                    src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
-                    alt="Add To Cart"
-                  />
-                  {` Add To Cart `}
-                </a>
-
+                  >
+                    <img
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        marginLeft: "0px",
+                      }}
+                      src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
+                      alt="Add To Cart"
+                    />
+                    {` Add To Cart `}
+                  </a>
+                ) : (
+                  <a
+                    onClick={RemoveProductToCartHandler}
+                    className="card-link"
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      marginRight: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        marginLeft: "0px",
+                      }}
+                      src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
+                      alt="Add To Cart"
+                    />
+                    {` Remove From To Cart `}
+                  </a>
+                )}
                 <div
                   style={{
                     display: "flex",
@@ -281,7 +340,7 @@ function Details({ products, dispatch }) {
           </div>
         </div>
       ) : (
-        "product not exist"
+        "product is comming...."
       )}
     </div>
   );
@@ -289,9 +348,8 @@ function Details({ products, dispatch }) {
 
 function mapStateToProps(state, ownProps) {
   return {
-    // products: state?.products,
-    // sorted: state?.sorted,
     products: state?.products,
+    cart: state?.cart,
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -16,6 +16,7 @@ function Home({ products, dispatch }) {
   //   console.log(PRODUCTS);
 
   const { allProducts, productsSorted } = products;
+  window.localStorage.setItem("allProducts", JSON.stringify(allProducts));
   useEffect(() => {
     dispatch(addProductsHandler());
     // console.log("add products to stor", products);

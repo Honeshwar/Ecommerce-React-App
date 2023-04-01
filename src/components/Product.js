@@ -106,101 +106,26 @@ function Product({ product, dispatch }) {
           </small>
         </li>
       </ul>
-      <div className="card-body" style={{ maxHeight: "50px" }}>
-        {isEdit ? (
-          <>
-            {" "}
-            <a
-              href={`/productDetail/edit/${product.id}`}
-              className="card-link"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                cursor: "pointer",
-              }}
-            >
-              Save
-              <img
-                style={{ width: "20px", height: "20px", marginLeft: "0px" }}
-                src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
-                alt="edit product details"
-              />
-            </a>
-            <a
-              href={`/productDetail/delete/${product.id}`}
-              className="card-link"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                cursor: "pointer",
-              }}
-            >
-              Cancel
-              <img
-                style={{ width: "30px", height: "30px", marginLeft: "0px" }}
-                src="https://cdn-icons-png.flaticon.com/128/10174/10174029.png"
-                alt="delete product"
-              />
-            </a>
-          </>
-        ) : (
-          <>
-            <a
-              onClick={AddToCartHandler}
-              className="card-link"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                marginRight: "5px",
-                cursor: "pointer",
-              }}
-            >
-              <img
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  marginLeft: "0px",
-                }}
-                src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
-                alt="Add To Cart"
-              />{" "}
-              Add To Cart
-            </a>
-
-            <a
-              onClick={editHandler}
-              className="card-link"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                cursor: "pointer",
-              }}
-            >
-              Edit
-              <img
-                style={{ width: "20px", height: "20px", marginLeft: "0px" }}
-                src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
-                alt="edit product details"
-              />
-            </a>
-            <a
-              onClick={deleteProductHandler}
-              className="card-link"
-              style={{
-                textDecoration: "none",
-                color: "black",
-                cursor: "pointer",
-              }}
-            >
-              Delete
-              <img
-                style={{ width: "30px", height: "30px", marginLeft: "0px" }}
-                src="https://cdn-icons-png.flaticon.com/128/10174/10174029.png"
-                alt="delete product"
-              />
-            </a>
-          </>
-        )}
+      <div
+        className="card-body"
+        style={{ maxHeight: "50px", textAlign: "center" }}
+      >
+        <Link
+          to={`/product-details/${product.id}`}
+          className="card-link"
+          style={{
+            textDecoration: "none",
+            color: "black",
+            cursor: "pointer",
+          }}
+        >
+          Details
+          <img
+            style={{ width: "20px", height: "20px", marginLeft: "0px" }}
+            src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
+            alt="edit product details"
+          />
+        </Link>
       </div>
     </div>
   );

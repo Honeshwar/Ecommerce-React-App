@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import "../styles/index.css";
 import { Home, AddToCart } from "../pages";
+import Details from "../pages/Details";
 
 function Error() {
   return <h1>Error 404</h1>;
@@ -20,6 +21,10 @@ function App() {
           {/*it help in finding exact path/url by default */}
           <Route path="/" element={<Home />}></Route>
           <Route path="/cart" element={<AddToCart />}></Route>
+          <Route
+            path="/product-details/:productId"
+            element={<Details />}
+          ></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

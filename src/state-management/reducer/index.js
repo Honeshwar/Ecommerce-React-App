@@ -26,7 +26,7 @@ function products(state = initialProductState, action) {
       return {
         ...state,
         allProducts: action.allProducts,
-        sorted: false,
+        productsSorted: false,
       };
     case SORT_PRODUCTS_BY_PRICE:
       const sortedProducts = state.allProducts.sort(function (a, b) {
@@ -35,7 +35,7 @@ function products(state = initialProductState, action) {
       return {
         ...state,
         allProducts: sortedProducts,
-        sorted: true,
+        productsSorted: true,
       };
     case UN_SORT_PRODUCTS_TO_NORMAL:
       const unSortedProducts = state.allProducts.sort(function (a, b) {
@@ -44,7 +44,7 @@ function products(state = initialProductState, action) {
       return {
         ...state,
         allProducts: unSortedProducts,
-        sorted: false,
+        productsSorted: false,
       };
     case DELETE_PRODUCT_FROM_STORE:
       // const index = state.allProducts.indexOf(action.product);
@@ -54,7 +54,7 @@ function products(state = initialProductState, action) {
       return {
         ...state,
         allProducts,
-        sorted: false,
+        productsSorted: false,
       };
 
     default:
@@ -77,11 +77,13 @@ function cart(state = initialCartState, action) {
       return {
         ...state,
         cartProducts: [action.product, ...state.cartProducts],
+        cartSorted: false,
       };
     case ADD_CART_TO_STORE:
       return {
         ...state,
         cartProducts: [...action.cartProducts],
+        cartSorted: false,
       };
     case SORT_CART_BY_PRICE:
       const sortedCart = state.cartProducts.sort(function (a, b) {

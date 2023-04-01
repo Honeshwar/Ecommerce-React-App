@@ -31,10 +31,10 @@ export function addProductsHandler() {
   };
 }
 
-export function addProductsToStore(products) {
+export function addProductsToStore(allProducts) {
   return {
     type: ADD_PRODUCT_TO_STORE,
-    products,
+    allProducts,
   };
 }
 

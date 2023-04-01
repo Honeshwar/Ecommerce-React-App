@@ -18,7 +18,7 @@ function Navbar() {
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="/navbarText"
+            data-bs-target="#navbarText"
             aria-controls="navbarText"
             aria-expanded="false"
             aria-label="Toggle navigation"
@@ -28,11 +28,7 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link
-                  className="nav-link active"
-                  aria-current="page"
-                  to="/products"
-                >
+                <Link className="nav-link active" aria-current="page" to="/">
                   Products
                 </Link>
               </li>

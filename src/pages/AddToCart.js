@@ -3,13 +3,9 @@ import { connect } from "react-redux";
 
 import styles from "../styles/home.module.css";
 import { SortBy, Cart } from "../components";
-import { getCart } from "../state-management/action";
 
 function AddToCart({ cart, dispatch }) {
   const { cartProducts, cartSorted } = cart;
-  // useEffect(() => {
-  //   dispatch(getCart());
-  // }, []);
 
   return (
     <div className={styles.products}>
@@ -18,7 +14,10 @@ function AddToCart({ cart, dispatch }) {
         {cartProducts?.map((product, index) => (
           <Cart key={index} product={product} dispatch={dispatch} />
         ))}
-        {cart?.length === 0 && "No Product is add to add to cart yet..."}
+
+        {cartProducts.length === 0 && (
+          <h1>No Product is add to add to cart yet...</h1>
+        )}
       </div>
     </div>
   );

@@ -24,22 +24,6 @@ function Details({ products, cart, dispatch }) {
 
   ////////////
 
-  useEffect(() => {
-    if (localStorage.getItem("state")) {
-      const state = JSON.parse(localStorage.getItem("state"));
-      console.log("local storage", state);
-      dispatch(
-        addProductsAndCartToStore(
-          state.products?.allProducts,
-          state.cart?.cartProducts
-        )
-      );
-      return;
-    }
-
-    dispatch(getProductAndCart());
-  }, []);
-
   console.log("product id", productId);
   //   console.log("local storage", JSON.parse(localStorage.getItem("state")));
 

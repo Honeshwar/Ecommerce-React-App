@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { AddProductToCart } from "../state-management/action";
+import { removeProductFromCart } from "../state-management/action";
+import { success } from "react-toast-notification";
 
 function Cart({ product, dispatch }) {
-  const [isEdit, setIsEdit] = useState(false);
-
-  //add to cart
-  const AddToCartHandler = () => {
-    dispatch(AddProductToCart()); //Add Product To Cart In Api And Redux Store Handler
+  //remove to cart
+  const removeProductFromCartHandler = () => {
+    dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
+    success("Successfully Remove Product From  Cart", {
+      title: "Remove Product From  Cart",
+    });
   };
 
   return (
@@ -29,70 +31,34 @@ function Cart({ product, dispatch }) {
         />
       </Link>
       <div className="card-body">
-        <h5 className="card-title">
-          {!isEdit ? (
-            `${product.title}`
-          ) : (
-            <input
-              type="text"
-              style={{ outline: "none" }}
-              value={product.title}
-            />
-          )}
-        </h5>
+        <h5 className="card-title">{product.title}</h5>
         <p className="card-text" style={{ color: "gray" }}>
-          {!isEdit ? (
-            `${product.description}`
-          ) : (
-            <textarea
-              cols="30"
-              rows={5}
-              type="text"
-              style={{ outline: "none" }}
-              value={product.description}
-            />
-          )}
+          {product.description}
         </p>
       </div>
       <ul className="list-group list-group-flush">
         <li className="list-group-item ">
           Price:
           <small style={{ color: "red" }}>
-            {" Rs "}{" "}
-            {!isEdit ? (
-              `${product.price}`
-            ) : (
-              <input
-                type="number"
-                style={{ outline: "none" }}
-                value={product.price}
-              />
-            )}
+            {" Rs "} {product.price}
           </small>
         </li>
         <li className="list-group-item ">
-          Rating:
+          {`Rating: `}
           <small className="" style={{ color: "yellowgreen" }}>
-            {!isEdit ? (
-              `${product.rating}`
-            ) : (
-              <input
-                type="number"
-                style={{ outline: "none" }}
-                value={`${product.rating}/5`}
-              />
-            )}
+            {product.rating}
           </small>
         </li>
       </ul>
       <div className="card-body" style={{ maxHeight: "50px" }}>
         <a
-          onClick={AddToCartHandler}
+          onClick={removeProductFromCartHandler}
           className="card-link"
           style={{
             textDecoration: "none",
             color: "black",
             marginRight: "5px",
+            cursor: "pointer",
           }}
         >
           <img

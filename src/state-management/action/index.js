@@ -104,15 +104,25 @@ export function AddProductToCartInReduxStore(product) {
   };
 }
 
-export function editProduct(productId, product) {
+export function editProduct(inCardAlso, productId, product) {
   return async function (dispatch) {
-    const response = await update("products", productId, product);
-    if (response.success) {
-      console.log("API response after edit/update", response);
-      dispatch(editProductInReduxStore(response.products));
+    const response1 = await update("products", productId, product);
+    if (inCardAlso) {
+      const response2 = await update("cart", productId, product);
+      if (response2.success) {
+        console.log("API response2 after edit/update", response2);
+        // dispatch(editProductInReduxStore(response2.products));
+        //res.products because fake api always give result in products array so always response2.products we do
+        return;
+      }
+      console.log("add cart api error", response2.message);
+    }
+    if (response1.success) {
+      console.log("API response1 after edit/update", response1);
+      dispatch(editProductInReduxStore(response1.products)); //data same store in redux store in allProducts and cartProducts array
       return;
     }
-    console.log("add cart api error", response.message);
+    console.log("add cart api error", response1.message);
   };
 }
 

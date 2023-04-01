@@ -84,6 +84,12 @@ function Details({ products, cart, dispatch }) {
   //   };
 
   const saveEditHandler = () => {
+    //cart also having this product or not
+    let inCart = false;
+    const index = cart.cartProducts.indexOf(product);
+    if (index !== -1) {
+      inCart = true;
+    }
     //no need to stringify because we done at custom fetch func,(api call)
     const UpdatedProduct = {
       //   id: product.id,
@@ -94,10 +100,12 @@ function Details({ products, cart, dispatch }) {
       //   thumbnail: "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
     };
     console.log("edited/updated product ", UpdatedProduct);
-    dispatch(editProduct(product.id, UpdatedProduct)); //edit Product In Api And Redux Store Handler
-    success("Successfully update Product ", {
+    dispatch(editProduct(inCart, product.id, UpdatedProduct)); //edit Product In Api And Redux Store Handler
+    success("😙Successfully update Product 🌝 👇  ", {
       title: "UPDATE",
     });
+
+    setIsEdit(false);
   };
 
   //   const deleteProduct = async () => {
@@ -129,7 +137,7 @@ function Details({ products, cart, dispatch }) {
           className=""
           style={{
             marginTop: "20px",
-            width: "80%",
+            width: "65%",
             height: "100%",
             marginBottom: "10px",
             boxShadow: " 0 0 2px 1px white",
@@ -327,7 +335,7 @@ function Details({ products, cart, dispatch }) {
                         height: "30px",
                         marginLeft: "0px",
                       }}
-                      src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
+                      src="https://cdn-icons-png.flaticon.com/128/5952/5952781.png"
                       alt="Add To Cart"
                     />
                     {` Remove From To Cart `}

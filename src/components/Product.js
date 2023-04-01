@@ -121,8 +121,8 @@ function Product({ product, dispatch }) {
         >
           Details
           <img
-            style={{ width: "20px", height: "20px", marginLeft: "0px" }}
-            src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
+            style={{ width: "30px", height: "30px", marginLeft: "3px" }}
+            src="https://cdn-icons-png.flaticon.com/128/6592/6592963.png"
             alt="edit product details"
           />
         </Link>

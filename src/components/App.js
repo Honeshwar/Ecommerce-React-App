@@ -39,7 +39,7 @@ function App({ products, cart, dispatch }) {
     dispatch(getProductAndCart());
   }, []);
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: "cadetblue" }}>
       <BrowserRouter>
         <Navbar />
         {/*first reason if use any routing functionality in  navbar so enclosed each comp (that want want to use this functionality)

@@ -132,6 +132,20 @@ function cart(state = initialCartState, action) {
         cartProducts,
         cartSorted: false,
       };
+    case UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS:
+      const Products = state.cartProducts.map((element) => {
+        if (element.id === action.product.id) {
+          return action.product;
+        }
+        return element;
+      });
+
+      return {
+        ...state,
+        cartProducts: Products,
+      };
+
+    //switch case have only one local scope inside switch(){...}
     default:
       return {
         ...state,

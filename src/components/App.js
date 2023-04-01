@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./Navbar";
 import "../styles/index.css";
-import { Home, Cart } from "../pages";
+import { Home, AddToCart } from "../pages";
 
 function Error() {
   return <h1>Error 404</h1>;
@@ -19,7 +19,7 @@ function App() {
         <Routes>
           {/*it help in finding exact path/url by default */}
           <Route path="/" element={<Home />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/cart" element={<AddToCart />}></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

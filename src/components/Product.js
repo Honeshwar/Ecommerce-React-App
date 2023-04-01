@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  deleteProduct,
+  deleteProductFromApiAndReduxStore,
   AddProductToCart,
   editProduct,
 } from "../state-management/action";
@@ -11,7 +11,7 @@ function Product({ product, dispatch }) {
 
   //delete
   const deleteProductHandler = () => {
-    dispatch(deleteProduct(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
+    dispatch(deleteProductFromApiAndReduxStore(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
   };
 
   //add to cart
@@ -113,7 +113,11 @@ function Product({ product, dispatch }) {
             <a
               href={`/productDetail/edit/${product.id}`}
               className="card-link"
-              style={{ textDecoration: "none", color: "black" }}
+              style={{
+                textDecoration: "none",
+                color: "black",
+                cursor: "pointer",
+              }}
             >
               Save
               <img
@@ -125,7 +129,11 @@ function Product({ product, dispatch }) {
             <a
               href={`/productDetail/delete/${product.id}`}
               className="card-link"
-              style={{ textDecoration: "none", color: "black" }}
+              style={{
+                textDecoration: "none",
+                color: "black",
+                cursor: "pointer",
+              }}
             >
               Cancel
               <img
@@ -144,6 +152,7 @@ function Product({ product, dispatch }) {
                 textDecoration: "none",
                 color: "black",
                 marginRight: "5px",
+                cursor: "pointer",
               }}
             >
               <img
@@ -161,7 +170,11 @@ function Product({ product, dispatch }) {
             <a
               onClick={editHandler}
               className="card-link"
-              style={{ textDecoration: "none", color: "black" }}
+              style={{
+                textDecoration: "none",
+                color: "black",
+                cursor: "pointer",
+              }}
             >
               Edit
               <img

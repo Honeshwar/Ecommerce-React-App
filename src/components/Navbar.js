@@ -37,7 +37,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/add-a-product">
+                <Link className="nav-link" to="/cart">
                   Cart
                   <img
                     style={{ width: "20px", height: "20px" }}

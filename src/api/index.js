@@ -17,13 +17,14 @@ const customFetch = async function (url, { body, ...config }) {
   const headers = {
     "Content-type": "application/json; charset=UTF-8",
   };
-  // body = JSON.stringify(body);
+  body = JSON.stringify(body);
   const configuration = {
     ...config,
     body, // body:body,
     headers,
   };
   try {
+    console.log("url and configuration", url, configuration);
     const response = await fetch(url, configuration);
     const responseData = await response.json();
     console.log("api call output in custom  fetch func", responseData);
@@ -43,15 +44,15 @@ const customFetch = async function (url, { body, ...config }) {
 };
 
 //CRUD OPERATION
-const addAProduct = (product) => {
-  return customFetch(API_URLS.addProduct, {
+const post = (to, product) => {
+  return customFetch(API_URLS.POST(to), {
     method: "POST",
     body: product,
   });
 };
 
-const getAllProducts = () => {
-  return customFetch(API_URLS.getProducts, {
+const get = (to) => {
+  return customFetch(API_URLS.GET(to), {
     //return an promise ,when promise full-filled than ,then() get called
     method: "GET",
   });
@@ -65,18 +66,18 @@ const getAllProducts = () => {
   // });
 };
 
-const updateProduct = (productId, product) => {
-  return customFetch(API_URLS.updateProduct(productId), {
+const update = (to, productId, product) => {
+  return customFetch(API_URLS.UPDATE(to, productId), {
     method: "PUT",
     body: product,
   });
 };
 
-const deleteProduct = (productId) => {
-  console.log("url", API_URLS.deleteProduct(productId));
-  return customFetch(API_URLS.deleteProduct(productId), {
+const remove = (to, productId) => {
+  console.log("url", API_URLS.DELETE(to, productId));
+  return customFetch(API_URLS.DELETE(to, productId), {
     method: "DELETE",
   });
 };
 
-export { addAProduct, getAllProducts, updateProduct, deleteProduct };
+export { post, get, update, remove };

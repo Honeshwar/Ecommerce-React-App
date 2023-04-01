@@ -1,8 +1,10 @@
 const API_URLS = {
-  getProducts: "http://localhost:3004/products?_start=0&_limit=100", //get
-  deleteProduct: (id) => `http://localhost:3004/products/${id}`, //delete
-  updateProduct: (id) => `http://localhost:3004/products/${id}`, //put,patch(single value update )
-  addProduct: "http://localhost:3004/products", //method=post
+  GET: (to) => `http://localhost:3004/${to}`, //get
+  DELETE: (to, id) => `http://localhost:3004/${to}/${id}`, //delete
+  UPDATE: (to, id) => `http://localhost:3004/${to}/${id}`, //put,patch(single value update )
+  POST: (to) => `http://localhost:3004/${to}`, //method=post
 };
 
 export default API_URLS;
+
+//get,post , update ,delete in products,cart array

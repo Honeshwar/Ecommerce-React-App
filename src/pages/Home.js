@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import Product from "../components/Product";
-import SortBy from "../components/SortBy";
-import styles from "../styles/products.module.css";
 import { connect } from "react-redux";
+
+import { SortBy, Product } from "../components";
+import styles from "../styles/home.module.css";
 import { addProductsHandler } from "../state-management/action";
 
-function Home({ products, sorted, dispatch }) {
+function Home({ products, dispatch }) {
   // console.log("props", products);
 
   // const [sortedProducts, setSortedProducts] = useState(products);
@@ -15,6 +15,7 @@ function Home({ products, sorted, dispatch }) {
   // const PRODUCTS = sorted ? sortedProducts : products; // dProduct;
   //   console.log(PRODUCTS);
 
+  const { allProducts, productsSorted } = products;
   useEffect(() => {
     dispatch(addProductsHandler());
     // console.log("add products to stor", products);
@@ -22,9 +23,9 @@ function Home({ products, sorted, dispatch }) {
 
   return (
     <div className={styles.products}>
-      <SortBy sorted={sorted} dispatch={dispatch} />
+      <SortBy productsSorted={productsSorted} dispatch={dispatch} />
       <div className={styles.listOfProducts}>
-        {products?.map((product, index) => (
+        {allProducts?.map((product, index) => (
           <Product key={index} product={product} dispatch={dispatch} />
         ))}
       </div>
@@ -34,8 +35,9 @@ function Home({ products, sorted, dispatch }) {
 
 function mapStateToProps(state, ownProps) {
   return {
+    // products: state?.products,
+    // sorted: state?.sorted,
     products: state?.products,
-    sorted: state?.sorted,
   };
 }
 function mapDispatchToProps(dispatch) {

@@ -6,11 +6,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 
-import { products } from "../reducer";
+import rootReducer from "../reducer";
 
 //create an store
 export const store = configureStore({
-  reducer: products,
+  reducer: rootReducer,
   middleware: [thunk, logger],
   preloadedState: {
     products: [],
@@ -19,3 +19,5 @@ export const store = configureStore({
   // devTools:true,
   // enhancers:[]
 });
+
+console.log("State root", store.getState());

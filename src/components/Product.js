@@ -1,37 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  deleteProductFromApiAndReduxStore,
-  AddProductToCart,
-  editProduct,
-} from "../state-management/action";
 
-function Product({ product, dispatch }) {
-  const [isEdit, setIsEdit] = useState(false);
-
-  //delete
-  const deleteProductHandler = () => {
-    dispatch(deleteProductFromApiAndReduxStore(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
-  };
-
-  //add to cart
-  const AddToCartHandler = () => {
-    dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-  };
-
-  //edit/update
-  const editHandler = () => {
-    dispatch(editProduct(product)); //edit Product In Api And Redux Store Handler
-  };
-
-  //   const deleteProduct = async () => {
-  //     const response = await deleteProduct(product.id); //every product comp have it own product props
-
-  //     const P = product.filter((e) => e.id != product.id);
-  //     setDProduct(P);
-  //   };
-  // };
-
+function Product({ product }) {
   return (
     <div
       className="card"
@@ -50,59 +20,24 @@ function Product({ product, dispatch }) {
         />
       </Link>
       <div className="card-body">
-        <h5 className="card-title">
-          {!isEdit ? (
-            `${product.title}`
-          ) : (
-            <input
-              type="text"
-              style={{ outline: "none" }}
-              value={product.title}
-            />
-          )}
-        </h5>
+        <h5 className="card-title">{product.title}</h5>
         <p className="card-text" style={{ color: "gray" }}>
-          {!isEdit ? (
-            `${product.description}`
-          ) : (
-            <textarea
-              cols="30"
-              rows={5}
-              type="text"
-              style={{ outline: "none" }}
-              value={product.description}
-            />
-          )}
+          {product.description}
         </p>
       </div>
       <ul className="list-group list-group-flush">
         <li className="list-group-item ">
           Price:
           <small style={{ color: "red" }}>
-            {" Rs "}{" "}
-            {!isEdit ? (
-              `${product.price}`
-            ) : (
-              <input
-                type="number"
-                style={{ outline: "none" }}
-                value={product.price}
-              />
-            )}
+            {` Rs `}
+
+            {product.price}
           </small>
         </li>
         <li className="list-group-item ">
-          Rating:
+          {` Rating: `}
           <small className="" style={{ color: "yellowgreen" }}>
-            {!isEdit ? (
-              `${product.rating}`
-            ) : (
-              <input
-                type="number"
-                style={{ outline: "none" }}
-                value={`${product.rating}/5`}
-              />
-            )}
+            {product.rating}
           </small>
         </li>
       </ul>

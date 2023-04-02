@@ -40,7 +40,7 @@ function Details({ products, cart, dispatch }) {
   //delete
   const deleteProductHandler = () => {
     dispatch(deleteProductFromApiAndReduxStore(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
-    success("🔻😫Successfully Remove Product From Redux Store🔻😫", {
+    success("🔻Successfully Remove Product From Redux Store😫", {
       title: "Remove Product Redux Store",
       delay: "7000",
       autoHide: false,
@@ -50,7 +50,7 @@ function Details({ products, cart, dispatch }) {
   //add to cart
   const AddToCartHandler = () => {
     dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    success(" ⛱️Successfully Added Product To Cart", {
+    success(" ⛱️Successfully Added Product To Cart 😛", {
       title: "Add TO Cart",
       delay: "7000",
       autoHide: false,
@@ -84,7 +84,7 @@ function Details({ products, cart, dispatch }) {
     };
 
     dispatch(editProduct(inCart, product.id, UpdatedProduct)); //edit Product In Api And Redux Store Handler
-    success("😙Successfully update Product 🌝 👇  ", {
+    success("😙Successfully update Product 🌝 👇😛  ", {
       title: "UPDATE",
       delay: "7000",
       autoHide: false,

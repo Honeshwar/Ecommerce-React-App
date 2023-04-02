@@ -4,10 +4,7 @@ import Navbar from "./Navbar";
 import "../styles/index.css";
 import { Home, AddToCart } from "../pages";
 import Details from "../pages/Details";
-import {
-  addProductsAndCartToStore,
-  getProductAndCart,
-} from "../state-management/action";
+import { getProductAndCart } from "../state-management/action";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 

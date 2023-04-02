@@ -12,7 +12,7 @@ function Product({ product, cart, dispatch }) {
   //add to cart
   const AddToCartHandler = () => {
     dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    success(" ⛱️Successfully Added Product To Cart", {
+    success(" ⛱️Successfully Added Product To Cart 😛", {
       title: "Add TO Cart",
       delay: "7000",
       autoHide: false,

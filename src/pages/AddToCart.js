@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import styles from "../styles/home.module.css";
 import { SortBy, Cart } from "../components";
+import { Link } from "react-router-dom";
 
 function AddToCart({ cart, dispatch }) {
   const { cartProducts, cartSorted } = cart;
@@ -16,7 +17,20 @@ function AddToCart({ cart, dispatch }) {
         ))}
 
         {cartProducts.length === 0 && (
-          <h1>No Product is add to add to cart yet...</h1>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <h1 style={{ color: "white", fontFamily: "cursive" }}>
+              No product is add to cart yet...
+            </h1>
+            <Link to="/" className="btn btn-warning">
+              Go Back To Home
+            </Link>
+          </div>
         )}
       </div>
     </div>

@@ -7,7 +7,6 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 import rootReducer from "../reducer";
-import { getProductAndCart } from "../action";
 
 //create an store
 export const store = configureStore({

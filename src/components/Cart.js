@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { removeProductFromCart } from "../state-management/action";
@@ -27,7 +27,7 @@ function Cart({ product, dispatch }) {
           style={{ maxHeight: "200px" }}
           src={product.thumbnail}
           className="card-img-top"
-          alt={`${product.title} Photo`}
+          alt={product.title}
         />
       </Link>
       <div className="card-body">

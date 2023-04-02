@@ -29,7 +29,7 @@ function Navbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">
-                  Products
+                  All Products
                 </Link>
               </li>
               <li className="nav-item">
@@ -54,7 +54,7 @@ function Navbar() {
                   marginLeft: "5px",
                 }}
                 src="https://cdn-icons-png.flaticon.com/128/9775/9775776.png"
-                alt="add product photo"
+                alt="profile photo"
               />
             </Link>
           </div>

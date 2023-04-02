@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { success, error } from "react-toast-notification";
+import { success } from "react-toast-notification";
 
 import {
   deleteProductFromApiAndReduxStore,
   AddProductToCart,
   editProduct,
   removeProductFromCart,
-  getProductAndCart,
-  addProductsAndCartToStore,
 } from "../state-management/action";
 import { connect } from "react-redux";
 
@@ -42,9 +40,10 @@ function Details({ products, cart, dispatch }) {
   console.log("got product in all product", findProduct);
 
   //cart
-  let index = cart.cartProducts?.filter((product) => product.id == productId);
-  console.log(index);
-  index = index.length;
+  // let ProductPresentInCart = cart.cartProducts?.filter((product) => product.id == productId);
+  let ProductPresentInCart = cart.cartProducts?.indexOf(product);
+  console.log(ProductPresentInCart);
+  // ProductPresentInCart = ProductPresentInCart.length;
 
   //set up state value if it is not set up yet
   if (title === "No Title" && product) {
@@ -65,7 +64,7 @@ function Details({ products, cart, dispatch }) {
   //add to cart
   const AddToCartHandler = () => {
     dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    success("Successfully Added Product To Cart", {
+    success(" ⛱️Successfully Added Product To Cart", {
       title: "Add TO Cart",
     });
   };
@@ -73,15 +72,10 @@ function Details({ products, cart, dispatch }) {
   //remove to cart
   const RemoveProductToCartHandler = () => {
     dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
-    success("Successfully Remove Product From  Cart", {
+    success("⛱️Successfully Remove Product From  Cart", {
       title: "Remove Product From  Cart",
     });
   };
-
-  //edit/update
-  //   const editHandler = () => {
-  //     dispatch(editProduct(product)); //edit Product In Api And Redux Store Handler
-  //   };
 
   const saveEditHandler = () => {
     //cart also having this product or not
@@ -107,14 +101,6 @@ function Details({ products, cart, dispatch }) {
 
     setIsEdit(false);
   };
-
-  //   const deleteProduct = async () => {
-  //     const response = await deleteProduct(product.id); //every product comp have it own product props
-
-  //     const P = product.filter((e) => e.id != product.id);
-  //     setDProduct(P);
-  //   };
-  // };
 
   return (
     <div
@@ -296,7 +282,7 @@ function Details({ products, cart, dispatch }) {
               </>
             ) : (
               <>
-                {index === 0 ? (
+                {ProductPresentInCart === -1 ? (
                   <a
                     onClick={AddToCartHandler}
                     className="card-link"

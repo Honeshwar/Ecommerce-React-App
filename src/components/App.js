@@ -12,7 +12,14 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 
 function Error() {
-  return <h1>Error 404</h1>;
+  return (
+    <h1 style={{ textAlign: "center", color: "whitesmoke" }}>
+      Error 404,page not exist
+    </h1>
+  );
+}
+function Profile() {
+  return <h1 style={{ textAlign: "center", color: "white" }}>Profile page</h1>;
 }
 
 function App({ products, cart, dispatch }) {
@@ -37,7 +44,7 @@ function App({ products, cart, dispatch }) {
     }
 
     dispatch(getProductAndCart());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="App" style={{ backgroundColor: "cadetblue" }}>
       <BrowserRouter>
@@ -53,6 +60,7 @@ function App({ products, cart, dispatch }) {
             path="/product-details/:productId"
             element={<Details />}
           ></Route>
+          <Route path="/profile" element={<Profile />}></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>

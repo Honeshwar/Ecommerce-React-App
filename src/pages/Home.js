@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { SortBy, Product } from "../components";
 import styles from "../styles/home.module.css";
-import {
-  addProductsHandler,
-  getProductAndCart,
-} from "../state-management/action";
 
-function Home({ products, dispatch }) {
+function Home({ products, cart, dispatch }) {
   const { allProducts, productsSorted } = products;
 
   return (
@@ -16,7 +12,12 @@ function Home({ products, dispatch }) {
       <SortBy productsSorted={productsSorted} dispatch={dispatch} />
       <div className={styles.listOfProducts}>
         {allProducts?.map((product, index) => (
-          <Product key={index} product={product} dispatch={dispatch} />
+          <Product
+            key={index}
+            product={product}
+            cart={cart}
+            dispatch={dispatch}
+          />
         ))}
       </div>
     </div>

@@ -1,7 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import {
+  AddProductToCart,
+  removeProductFromCart,
+} from "../state-management/action";
+import { success } from "react-toast-notification";
 
-function Product({ product }) {
+function Product({ product, cart, dispatch }) {
+  // let ProductPresentInCart = cart.cartProducts?.filter((product) => product.id == productId);
+  let ProductPresentInCart = cart.cartProducts?.indexOf(product);
+  console.log(ProductPresentInCart);
+  // ProductPresentInCart = ProductPresentInCart.length;
+
+  //add to cart
+  const AddToCartHandler = () => {
+    dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
+    success(" ⛱️Successfully Added Product To Cart", {
+      title: "Add TO Cart",
+    });
+  };
+
+  //remove to cart
+  const RemoveProductToCartHandler = () => {
+    dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
+    success("⛱️Successfully Remove Product From  Cart", {
+      title: "Remove Product From  Cart",
+    });
+  };
+
   return (
     <div
       className="card"
@@ -43,8 +69,57 @@ function Product({ product }) {
       </ul>
       <div
         className="card-body"
-        style={{ maxHeight: "50px", textAlign: "center" }}
+        style={{
+          maxHeight: "50px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
       >
+        {ProductPresentInCart === -1 ? (
+          <a
+            onClick={AddToCartHandler}
+            className="card-link"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              marginRight: "5px",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              style={{
+                width: "30px",
+                height: "30px",
+                marginLeft: "0px",
+              }}
+              src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
+              alt="Add To Cart"
+            />
+            {` Add  `}
+          </a>
+        ) : (
+          <a
+            onClick={RemoveProductToCartHandler}
+            className="card-link"
+            style={{
+              textDecoration: "none",
+              color: "black",
+              marginRight: "5px",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              style={{
+                width: "30px",
+                height: "30px",
+                marginLeft: "0px",
+              }}
+              src="https://cdn-icons-png.flaticon.com/128/5952/5952781.png"
+              alt="Add To Cart"
+            />
+            {` Remove `}
+          </a>
+        )}
         <Link
           to={`/product-details/${product.id}`}
           className="card-link"

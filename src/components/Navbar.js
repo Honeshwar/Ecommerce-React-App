@@ -38,7 +38,7 @@ function Navbar() {
                   <img
                     style={{ width: "20px", height: "20px" }}
                     src="https://cdn-icons-png.flaticon.com/128/891/891407.png"
-                    alt="add product photo"
+                    alt="add product"
                   />{" "}
                 </Link>
               </li>
@@ -54,7 +54,8 @@ function Navbar() {
                   marginLeft: "5px",
                 }}
                 src="https://cdn-icons-png.flaticon.com/128/9775/9775776.png"
-                alt="profile photo"
+                alt="profile "
+                // can't use  You don’t need to use the words `image`, `photo,` or `picture` (or any specified custom words) in the alt prop
               />
             </Link>
           </div>

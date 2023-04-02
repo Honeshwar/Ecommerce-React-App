@@ -8,10 +8,13 @@ import { store } from "./state-management/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  //<React.StrictMode>
-  <Provider store={store}>
-    {/*an component that return an context.Provider component(value={props.store}) with children as App component*/}
-    <App />
-  </Provider>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
 );
+
+{
+  /*Provider = an component that return an context.Provider component(value={props.store}) with children as App component*/
+}

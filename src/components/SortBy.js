@@ -6,31 +6,28 @@ import {
   unSortCart,
   unSortProducts,
 } from "../state-management/action";
-// import { connect } from "react-redux";
 
 function SortBy({ dispatch, productsSorted, isCart, cartSorted }) {
-  console.log("sorted", productsSorted, " cartSorted", cartSorted);
-
-  //for product
+  //sort/un-sort for product
   const sortProductsByPriceHandler = () => {
-    //   setSorting(true);
     if (productsSorted) {
       dispatch(unSortProducts()); //get action obj--call dispatch--MW--reducer call by store ,store pass action ,current state in reducer
       return;
     }
-    //if not sorted,than do sort
-    dispatch(sortProductsByPrice());
+
+    dispatch(sortProductsByPrice()); //if not sorted,than do sort
   };
-  //for cart
+
+  //sort/un-sort for cart
   const sortCartByPriceHandler = () => {
-    //   setSorting(true);
     if (cartSorted) {
       dispatch(unSortCart()); //get action obj--call dispatch--MW--reducer call by store ,store pass action ,current state in reducer
       return;
     }
-    //if not sorted,than do sort
-    dispatch(sortCartByPrice());
+
+    dispatch(sortCartByPrice()); //if not sorted,than do sort
   };
+
   return (
     <div className={styles.sortBy}>
       <h3>{isCart ? "Cart Products" : "All Products"}</h3>

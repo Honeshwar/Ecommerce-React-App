@@ -12,8 +12,6 @@ import { connect } from "react-redux";
 
 function Details({ products, cart, dispatch }) {
   const { productId } = useParams();
-
-  //loosely type language JS var a=1,a="das",a=false,a=33.3,.....,on run time js compiler define type and allocate that type storage to variable
   const [isEdit, setIsEdit] = useState(false);
   const [title, setTitle] = useState("No Title");
   const [description, setDescription] = useState("No Description");
@@ -21,26 +19,15 @@ function Details({ products, cart, dispatch }) {
   const [rating, setRating] = useState("No Rating");
 
   ////////////
-  console.log("product id", productId);
   let { allProducts } = products;
-  console.log(
-    "connect give your newly state on each state change",
-    products,
-    cart
-  );
-
   const findProduct = allProducts?.filter((e) => e.id == productId);
   let product;
   if (findProduct?.length === 1) {
     product = findProduct[0];
   }
-  console.log("got product in all product", findProduct);
 
   //cart
-  // let ProductPresentInCart = cart.cartProducts?.filter((product) => product.id == productId);
   let ProductPresentInCart = cart.cartProducts?.indexOf(product);
-  console.log(ProductPresentInCart);
-  // ProductPresentInCart = ProductPresentInCart.length;
 
   //set up state value if it is not set up yet
   if (title === "No Title" && product) {
@@ -53,7 +40,7 @@ function Details({ products, cart, dispatch }) {
   //delete
   const deleteProductHandler = () => {
     dispatch(deleteProductFromApiAndReduxStore(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
-    success("Successfully Remove Product From Redux Store", {
+    success("🔻😫Successfully Remove Product From Redux Store🔻😫", {
       title: "Remove Product Redux Store",
       delay: "7000",
       autoHide: false,
@@ -73,7 +60,7 @@ function Details({ products, cart, dispatch }) {
   //remove to cart
   const RemoveProductToCartHandler = () => {
     dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
-    success("⛱️Successfully Remove Product From  Cart", {
+    success("🔻Successfully Remove Product From  Cart 😫", {
       title: "Remove Product From  Cart",
       delay: "7000",
       autoHide: false,
@@ -87,16 +74,15 @@ function Details({ products, cart, dispatch }) {
     if (index !== -1) {
       inCart = true;
     }
+
     //no need to stringify because we done at custom fetch func,(api call)
     const UpdatedProduct = {
-      //   id: product.id,
       title,
       description,
       price,
       rating,
-      //   thumbnail: "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
     };
-    console.log("edited/updated product ", UpdatedProduct);
+
     dispatch(editProduct(inCart, product.id, UpdatedProduct)); //edit Product In Api And Redux Store Handler
     success("😙Successfully update Product 🌝 👇  ", {
       title: "UPDATE",
@@ -388,7 +374,7 @@ function Details({ products, cart, dispatch }) {
         </div>
       ) : (
         <>
-          <h3>Product Is Removed...</h3>
+          <h3 style={{ color: "white" }}>Product Is Removed...</h3>
           <Link to="/" className="btn btn-primary">
             Go Back To Home
           </Link>
@@ -398,15 +384,13 @@ function Details({ products, cart, dispatch }) {
   );
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     products: state?.products,
     cart: state?.cart,
   };
 }
 function mapDispatchToProps(dispatch) {
-  // console.log("disp", a);
-
   return {
     dispatch,
   };

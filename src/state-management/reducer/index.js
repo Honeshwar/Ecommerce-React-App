@@ -16,7 +16,7 @@ import {
   UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
 } from "../action";
 
-//pure function are responsible for only for output based on arguments
+//pure function are responsible for only for arguments based output
 const initialProductState = {
   allProducts: [],
   productsSorted: false,
@@ -85,7 +85,6 @@ function products(state = initialProductState, action) {
 }
 
 // reducer for cart
-//pure function are responsible for only for output based on arguments
 const initialCartState = {
   cartProducts: [],
   cartSorted: false,

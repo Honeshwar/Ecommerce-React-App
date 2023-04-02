@@ -22,29 +22,11 @@ function Profile() {
   return <h1 style={{ textAlign: "center", color: "white" }}>Profile page</h1>;
 }
 
-function App({ products, cart, dispatch }) {
-  if (products.allProduct?.length > 0 && cart.cartProducts.length > 0) {
-    const state = {
-      products,
-      cart,
-    };
-    window.localStorage.setItem("state", JSON.stringify(state));
-  }
+function App({ dispatch }) {
   useEffect(() => {
-    if (localStorage.getItem("state")) {
-      const state = JSON.parse(localStorage.getItem("state"));
-      console.log("local storage", state);
-      dispatch(
-        addProductsAndCartToStore(
-          state.products?.allProducts,
-          state.cart?.cartProducts
-        )
-      );
-      return;
-    }
-
     dispatch(getProductAndCart());
   }, [dispatch]);
+
   return (
     <div className="App" style={{ backgroundColor: "cadetblue" }}>
       <BrowserRouter>
@@ -70,14 +52,11 @@ function App({ products, cart, dispatch }) {
 
 function mapStateToProps(state, ownProps) {
   return {
-    // products: state?.products,
-    // sorted: state?.sorted,
     products: state?.products,
     cart: state?.cart,
   };
 }
 function mapDispatchToProps(dispatch) {
-  // console.log("disp", a);
   return {
     dispatch,
   };

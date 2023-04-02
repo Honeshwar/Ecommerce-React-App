@@ -37,27 +37,20 @@ function AddToCart({ cart, dispatch }) {
   );
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
+  //root state = {products:{},cart:{}}
   return {
-    // products: state?.products,
-    // productsSorted: state?.productsSorted,
-    // cart: state?.cart,
-    // cartSorted: state?.cartSorted,
     cart: state?.cart,
-  }; //root state = {allProduct:{},cart:{}}
+  };
 }
 function mapDispatchToProps(dispatch) {
-  // console.log("disp", a);
   return {
     dispatch,
   };
 }
 
-// WrapperAppComponent pass an state,dispatch as props to App component(as children of it)
 const WrapperCartComponent = connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddToCart); //return Wrapper around AppComponent
-//connect m automatically pass store,enclose connect inside an provider
-//connect func also subscribe to store,state change it re-render/pass again props/do callback again
 export default WrapperCartComponent;

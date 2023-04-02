@@ -7,10 +7,7 @@ import {
 import { success } from "react-toast-notification";
 
 function Product({ product, cart, dispatch }) {
-  // let ProductPresentInCart = cart.cartProducts?.filter((product) => product.id == productId);
   let ProductPresentInCart = cart.cartProducts?.indexOf(product);
-  console.log(ProductPresentInCart);
-  // ProductPresentInCart = ProductPresentInCart.length;
 
   //add to cart
   const AddToCartHandler = () => {
@@ -25,7 +22,7 @@ function Product({ product, cart, dispatch }) {
   //remove to cart
   const RemoveProductToCartHandler = () => {
     dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
-    success("⛱️Successfully Remove Product From  Cart", {
+    success("🔻Successfully Remove Product From  Cart 😫", {
       title: "Remove Product From  Cart",
       delay: "7000",
       autoHide: false,

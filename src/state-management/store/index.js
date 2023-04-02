@@ -11,13 +11,18 @@ import rootReducer from "../reducer";
 //create an store
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: [thunk, logger],
-  preloadedState: {
-    products: [],
-    sorted: false,
-  },
-  // devTools:true,
-  // enhancers:[]
+  middleware: [thunk],
 });
 
-console.log("State root", store.getState());
+// preloadedState: {
+//    products:{
+//       allProducts: [],
+//       productsSorted: false,
+//    },
+//    cart:{
+//      cartProducts:[],
+//     cartSorted:false
+//    }
+//   },
+// devTools:true,//dy default
+// enhancers:[]

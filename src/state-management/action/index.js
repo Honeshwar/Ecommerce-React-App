@@ -25,12 +25,9 @@ export function addProductsHandler() {
     //by default useEffect is synchronous in nature but api call is synchro so to make useEffect asynchronous we use async await
 
     const response = await get("products"); //it get full-filled promise and await return (auto call then()) and return promiseResult
-    console.log("response", response);
 
     if (response.success) {
       dispatch(addProductsToStore(response.products)); //action obj return than dispatch
-    } else {
-      console.log("error while api call", response.message);
     }
   };
 }
@@ -64,11 +61,9 @@ export function deleteProductFromApiAndReduxStore(product) {
   return async function (dispatch) {
     const response = await remove("products", product.id);
     if (response.success) {
-      console.log("delete api", response);
       dispatch(deleteProductFromStore(product));
       return;
     }
-    console.log("delete api error", response.message);
   };
 }
 
@@ -88,11 +83,9 @@ export function AddProductToCart(product) {
   return async function (dispatch) {
     const response = await post("cart", product);
     if (response.success) {
-      console.log("add to cart api", response);
       dispatch(AddProductToCartInReduxStore(product));
       return;
     }
-    console.log("add cart api error", response.message);
   };
 }
 
@@ -109,25 +102,15 @@ export function editProduct(inCardAlso, productId, product) {
     const response1 = await update("products", productId, product);
     if (inCardAlso) {
       const response2 = await update("cart", productId, product);
-      if (response2.success) {
-        console.log("API response2 after edit/update", response2);
-        // dispatch(editProductInReduxStore(response2.products));
-        //res.products because fake api always give result in products array so always response2.products we do
-        return;
-      }
-      console.log("add cart api error", response2.message);
     }
     if (response1.success) {
-      console.log("API response1 after edit/update", response1);
       dispatch(editProductInReduxStore(response1.products)); //data same store in redux store in allProducts and cartProducts array
       return;
     }
-    console.log("add cart api error", response1.message);
   };
 }
 
 export function editProductInReduxStore(product) {
-  console.log("edit to redux store");
   return {
     type: UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
     product,
@@ -140,21 +123,11 @@ export function getProductAndCart() {
     const response1 = await get("products");
     const response2 = await get("cart");
     if (response1.success && response2.success) {
-      console.log(
-        "get products and cart  from api *********",
-        response1,
-        response2
-      );
       dispatch(
         addProductsAndCartToStore(response1.products, response2.products)
       ); //response={success,products:[]},create in api return custom fetch,api res={cart:[]}
       return;
     }
-    console.log(
-      "get products and cart api error",
-      response1.message,
-      response2.message
-    );
   };
 }
 
@@ -185,11 +158,9 @@ export function removeProductFromCart(productId) {
   return async function (dispatch) {
     const response = await remove("cart", productId);
     if (response.success) {
-      console.log("add to cart api", response);
       dispatch(removeProductFromCartInStore(productId)); //response={success,products:[]},create in api return custom fetch,api res={cart:[]}
       return;
     }
-    console.log("add cart api error", response.message);
   };
 }
 

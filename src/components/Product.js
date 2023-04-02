@@ -38,12 +38,14 @@ function Product({ product, cart, dispatch }) {
         boxShadow: " 0 0 2px 1px black",
       }}
     >
-      <Link to={`/productDetail/${product.id}`}>
+      <Link to={`/product-details/${product.id}`}>
         <img
           style={{ maxHeight: "200px" }}
           src={product.thumbnail}
           className="card-img-top"
-          alt={`${product.title} Photo`}
+          alt={
+            product.title
+          } /*{`${product.title} Photo`} You don’t need to use the words `image`, `photo,` or `picture` (or any specified custom words) in the alt prop , they want specify word that define image  */
         />
       </Link>
       <div className="card-body">
@@ -77,7 +79,7 @@ function Product({ product, cart, dispatch }) {
         }}
       >
         {ProductPresentInCart === -1 ? (
-          <a
+          <button
             onClick={AddToCartHandler}
             className="card-link"
             style={{
@@ -85,6 +87,8 @@ function Product({ product, cart, dispatch }) {
               color: "black",
               marginRight: "5px",
               cursor: "pointer",
+              backgroundColor: "white",
+              border: "none",
             }}
           >
             <img
@@ -97,9 +101,9 @@ function Product({ product, cart, dispatch }) {
               alt="Add To Cart"
             />
             {` Add  `}
-          </a>
+          </button>
         ) : (
-          <a
+          <button
             onClick={RemoveProductToCartHandler}
             className="card-link"
             style={{
@@ -107,6 +111,8 @@ function Product({ product, cart, dispatch }) {
               color: "black",
               marginRight: "5px",
               cursor: "pointer",
+              backgroundColor: "white",
+              border: "none",
             }}
           >
             <img
@@ -119,7 +125,7 @@ function Product({ product, cart, dispatch }) {
               alt="Add To Cart"
             />
             {` Remove `}
-          </a>
+          </button>
         )}
         <Link
           to={`/product-details/${product.id}`}

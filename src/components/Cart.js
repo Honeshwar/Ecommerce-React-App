@@ -53,7 +53,8 @@ function Cart({ product, dispatch }) {
         </li>
       </ul>
       <div className="card-body" style={{ maxHeight: "50px" }}>
-        <a
+        <button
+          // href={removeProductFromCartHandler}
           onClick={removeProductFromCartHandler}
           className="card-link"
           style={{
@@ -61,19 +62,21 @@ function Cart({ product, dispatch }) {
             color: "black",
             marginRight: "5px",
             cursor: "pointer",
+            backgroundColor: "white",
+            border: "none",
           }}
         >
           <img
             style={{
-              width: "20px",
-              height: "20px",
+              width: "25px",
+              height: "25px",
               marginLeft: "0px",
             }}
             src="https://cdn-icons-png.flaticon.com/128/5952/5952781.png"
             alt="Add To Cart"
           />{" "}
           Remove From Cart
-        </a>
+        </button>
       </div>
     </div>
   );

@@ -11,7 +11,8 @@ import {
 import { connect } from "react-redux";
 
 function Details({ products, cart, dispatch }) {
-  const { productId } = useParams();
+  let { productId } = useParams();
+  productId = parseInt(productId); //because params pass as string
   const [isEdit, setIsEdit] = useState(false);
   const [title, setTitle] = useState("No Title");
   const [description, setDescription] = useState("No Description");
@@ -20,7 +21,7 @@ function Details({ products, cart, dispatch }) {
 
   ////////////
   let { allProducts } = products;
-  const findProduct = allProducts?.filter((e) => e.id == productId);
+  const findProduct = allProducts?.filter((e) => e.id === productId);
   let product;
   if (findProduct?.length === 1) {
     product = findProduct[0];
@@ -113,7 +114,6 @@ function Details({ products, cart, dispatch }) {
         <div
           className=""
           style={{
-            marginTop: "20px",
             width: "65%",
             height: "100%",
             marginBottom: "10px",
@@ -126,15 +126,13 @@ function Details({ products, cart, dispatch }) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-evenly",
-            backgroundColor: "white",
             backgroundColor: "aliceblue",
           }}
         >
           <Link
-            to={`/productDetail/${product?.id}`}
+            to={`/product-details/${product.id}`}
             style={{
               display: "flex",
-
               justifyContent: "center",
               backgroundColor: "gainsboro",
             }}
@@ -143,7 +141,7 @@ function Details({ products, cart, dispatch }) {
               style={{ width: "60%", maxHeight: "250px" }}
               src={product.thumbnail}
               className="card-img-top"
-              alt={`${product.title} Photo`}
+              alt={product.title}
             />
           </Link>
           <div className="" style={{ marginTop: "20px", marginBottom: "10px" }}>
@@ -236,7 +234,7 @@ function Details({ products, cart, dispatch }) {
             {isEdit ? (
               <>
                 {" "}
-                <a
+                <button
                   onClick={saveEditHandler}
                   className="card-link"
                   style={{
@@ -244,6 +242,8 @@ function Details({ products, cart, dispatch }) {
                     color: "black",
                     cursor: "pointer",
                     marginLeft: "10px",
+                    backgroundColor: "aliceblue",
+                    border: "none",
                   }}
                 >
                   {` Save `}
@@ -252,8 +252,8 @@ function Details({ products, cart, dispatch }) {
                     src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
                     alt="edit product details"
                   />
-                </a>
-                <a
+                </button>
+                <button
                   onClick={() => setIsEdit(false)}
                   className="card-link"
                   style={{
@@ -261,6 +261,8 @@ function Details({ products, cart, dispatch }) {
                     color: "black",
                     cursor: "pointer",
                     marginRight: "10px",
+                    backgroundColor: "aliceblue",
+                    border: "none",
                   }}
                 >
                   Cancel
@@ -269,12 +271,12 @@ function Details({ products, cart, dispatch }) {
                     src="https://cdn-icons-png.flaticon.com/128/10174/10174029.png"
                     alt="delete product"
                   />
-                </a>
+                </button>
               </>
             ) : (
               <>
                 {ProductPresentInCart === -1 ? (
-                  <a
+                  <button
                     onClick={AddToCartHandler}
                     className="card-link"
                     style={{
@@ -282,6 +284,8 @@ function Details({ products, cart, dispatch }) {
                       color: "black",
                       marginRight: "5px",
                       cursor: "pointer",
+                      backgroundColor: "aliceblue",
+                      border: "none",
                     }}
                   >
                     <img
@@ -294,9 +298,9 @@ function Details({ products, cart, dispatch }) {
                       alt="Add To Cart"
                     />
                     {` Add To Cart `}
-                  </a>
+                  </button>
                 ) : (
-                  <a
+                  <button
                     onClick={RemoveProductToCartHandler}
                     className="card-link"
                     style={{
@@ -304,6 +308,8 @@ function Details({ products, cart, dispatch }) {
                       color: "black",
                       marginRight: "5px",
                       cursor: "pointer",
+                      backgroundColor: "aliceblue",
+                      border: "none",
                     }}
                   >
                     <img
@@ -316,23 +322,25 @@ function Details({ products, cart, dispatch }) {
                       alt="Add To Cart"
                     />
                     {` Remove From To Cart `}
-                  </a>
+                  </button>
                 )}
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
 
-                    width: "20%",
+                    width: "25%",
                   }}
                 >
-                  <a
+                  <button
                     onClick={() => setIsEdit(true)}
                     className="card-link"
                     style={{
                       textDecoration: "none",
                       color: "black",
                       cursor: "pointer",
+                      backgroundColor: "aliceblue",
+                      border: "none",
                     }}
                   >
                     {` Edit `}
@@ -346,14 +354,16 @@ function Details({ products, cart, dispatch }) {
                       src="https://cdn-icons-png.flaticon.com/128/738/738880.png"
                       alt="edit product details"
                     />
-                  </a>
-                  <a
+                  </button>
+                  <button
                     onClick={deleteProductHandler}
                     className="card-link"
                     style={{
                       textDecoration: "none",
                       color: "black",
                       cursor: "pointer",
+                      backgroundColor: "aliceblue",
+                      border: "none",
                     }}
                   >
                     Delete
@@ -366,7 +376,7 @@ function Details({ products, cart, dispatch }) {
                       src="https://cdn-icons-png.flaticon.com/128/10174/10174029.png"
                       alt="delete product"
                     />
-                  </a>
+                  </button>
                 </div>
               </>
             )}

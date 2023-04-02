@@ -101,7 +101,7 @@ export function editProduct(inCardAlso, productId, product) {
   return async function (dispatch) {
     const response1 = await update("products", productId, product);
     if (inCardAlso) {
-      const response2 = await update("cart", productId, product);
+      await update("cart", productId, product); //const response2 =
     }
     if (response1.success) {
       dispatch(editProductInReduxStore(response1.products)); //data same store in redux store in allProducts and cartProducts array

@@ -3,7 +3,7 @@
 //redux is an js toolkit that help us/use for state management
 
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
+// import logger from "redux-logger";
 import thunk from "redux-thunk";
 
 import rootReducer from "../reducer";

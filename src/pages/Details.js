@@ -21,10 +21,7 @@ function Details({ products, cart, dispatch }) {
   const [rating, setRating] = useState("No Rating");
 
   ////////////
-
   console.log("product id", productId);
-  //   console.log("local storage", JSON.parse(localStorage.getItem("state")));
-
   let { allProducts } = products;
   console.log(
     "connect give your newly state on each state change",
@@ -58,6 +55,8 @@ function Details({ products, cart, dispatch }) {
     dispatch(deleteProductFromApiAndReduxStore(product)); //this dispatch not execute MW return in between call se,to make action asynchronous
     success("Successfully Remove Product From Redux Store", {
       title: "Remove Product Redux Store",
+      delay: "7000",
+      autoHide: false,
     });
   };
 
@@ -66,6 +65,8 @@ function Details({ products, cart, dispatch }) {
     dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
     success(" ⛱️Successfully Added Product To Cart", {
       title: "Add TO Cart",
+      delay: "7000",
+      autoHide: false,
     });
   };
 
@@ -74,6 +75,8 @@ function Details({ products, cart, dispatch }) {
     dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
     success("⛱️Successfully Remove Product From  Cart", {
       title: "Remove Product From  Cart",
+      delay: "7000",
+      autoHide: false,
     });
   };
 
@@ -97,6 +100,8 @@ function Details({ products, cart, dispatch }) {
     dispatch(editProduct(inCart, product.id, UpdatedProduct)); //edit Product In Api And Redux Store Handler
     success("😙Successfully update Product 🌝 👇  ", {
       title: "UPDATE",
+      delay: "7000",
+      autoHide: false,
     });
 
     setIsEdit(false);

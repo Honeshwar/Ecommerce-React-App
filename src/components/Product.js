@@ -17,6 +17,8 @@ function Product({ product, cart, dispatch }) {
     dispatch(AddProductToCart(product)); //Add Product To Cart In Api And Redux Store Handler
     success(" ⛱️Successfully Added Product To Cart", {
       title: "Add TO Cart",
+      delay: "7000",
+      autoHide: false,
     });
   };
 
@@ -25,6 +27,8 @@ function Product({ product, cart, dispatch }) {
     dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
     success("⛱️Successfully Remove Product From  Cart", {
       title: "Remove Product From  Cart",
+      delay: "7000",
+      autoHide: false,
     });
   };
 

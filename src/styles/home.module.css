@@ -37,7 +37,7 @@
 /* styling entire product container/component */
 .products {
   width: 100%;
-  height: 89.6%;
+  height: 88.6%;
   overflow-y: scroll;
   /* background-color: lightgray; */
 }

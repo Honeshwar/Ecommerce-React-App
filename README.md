@@ -1,3 +1,3 @@
 # Ecommerce React App
 
-#### Hosted Link - https://cerulean-duckanoo-bb97e0.netlify.app
+#### Hosted Link - https://ecommerce-react-app-1.netlify.app

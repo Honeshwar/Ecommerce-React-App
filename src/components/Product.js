@@ -34,7 +34,7 @@ function Product({ product, cart, dispatch }) {
       className="card"
       style={{
         width: "19rem",
-        marginBottom: "10px",
+        margin: "20px",
         boxShadow: " 0 0 2px 1px black",
       }}
     >

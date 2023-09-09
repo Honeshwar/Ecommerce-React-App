@@ -114,7 +114,7 @@ function Details({ products, cart, dispatch }) {
         <div
           className=""
           style={{
-            width: "65%",
+            width: "55%",
             height: "100%",
             marginBottom: "10px",
             boxShadow: " 0 0 2px 1px white",

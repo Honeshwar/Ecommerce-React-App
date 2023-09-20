@@ -1,10 +1,10 @@
 /* (fake api)for use only, it not delete,update.. actually */
-const baseUrl = "https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/products/";
+const baseUrl = "https://my-json-server.typicode.com/Honeshwar/dummy-ecommerce-api-service/";
 const API_URLS = {
-  GET: () =>baseUrl , //get
-  DELETE: ( id) =>baseUrl + `${id}`, //delete
-  UPDATE: (id) =>baseUrl + `${id}`, //put,patch(selected properties update )
-  POST: () =>baseUrl , //method=post
+  GET: (from) =>baseUrl + `${from}`, //get
+  DELETE: (from, id) =>baseUrl + `${from}/${id}`, //delete
+  UPDATE: (from, id) =>baseUrl + `${from}/${id}`, //put,patch(selected properties update )
+  POST: (from) =>baseUrl + `${from}`, //method=post
 };
 export default API_URLS;
 

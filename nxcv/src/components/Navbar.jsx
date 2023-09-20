@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
-import "../styles/navbar.css";
-function Navbar({totalPrize}) {
-
+import "../styles/navbar.module.css";
+function Navbar() {
   return (
+    <>
     <div className="navbar-component">
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
@@ -63,6 +63,8 @@ function Navbar({totalPrize}) {
         </div>
       </nav>
     </div>
+    <Outlet context={true}/>
+    </>
   );
 }
 

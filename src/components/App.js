@@ -1,31 +1,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Navbar from "./Navbar";
 import "../styles/index.css";
 import { Home, AddToCart } from "../pages";
 import Details from "../pages/Details";
-import { getProductAndCart } from "../state-management/action";
-import { useEffect } from "react";
+import { addProductsHandler } from "../state-management/action";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import {Navbar, Error, Profile} from "./index.js";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Error() {
-  return (
-    <h1 style={{ textAlign: "center", color: "whitesmoke" }}>
-      Error 404,page not exist
-    </h1>
-  );
-}
-function Profile() {
-  return <h1 style={{ textAlign: "center", color: "white" }}>Profile page</h1>;
-}
 
-function App({ dispatch }) {
+function App({ dispatch,user,products }) {
+  //using side effects
   useEffect(() => {
-    dispatch(getProductAndCart());
+    dispatch(addProductsHandler());
+    //add products to localstorage
+    localStorage.setItem("PRODUCTS",products);
+    //add user to localstorage
+    // localStorage.setItem(USER,JSON.stringify(user));
   }, [dispatch]);
 
   return (
-    <div className="App" style={{ backgroundColor: "cadetblue" }}>
+    <div className="App" >
+       <ToastContainer autoClose={3000}/>
       <BrowserRouter>
         <Navbar />
         {/*first reason if use any routing functionality in  navbar so enclosed each comp (that want want to use this functionality)
@@ -33,13 +30,13 @@ function App({ dispatch }) {
         second reason , i not write comp inside routes because we don't need that on each routing navbar comp load again (vdom) */}
         <Routes>
           {/*it help in finding exact path/url by default */}
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home/>}></Route>
           <Route path="/cart" element={<AddToCart />}></Route>
           <Route
             path="/product-details/:productId"
             element={<Details />}
           ></Route>
-          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/profile" element={<Profile user={user}/>}></Route>
           <Route path="/*" element={<Error />}></Route>
         </Routes>
       </BrowserRouter>
@@ -50,7 +47,7 @@ function App({ dispatch }) {
 function mapStateToProps(state, ownProps) {
   return {
     products: state?.products,
-    cart: state?.cart,
+    user: state?.user,
   };
 }
 function mapDispatchToProps(dispatch) {

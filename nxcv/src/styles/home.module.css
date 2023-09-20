@@ -1,0 +1,58 @@
+/* styling sort by */
+.sortBy {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.sortBy h3 {
+  margin-left: 30px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(2, 10, 80);
+  padding: 10px;
+  font-family: monospace;
+  box-shadow: 0 0 2px 1px rgb(255, 255, 255);
+}
+
+.sortBy span {
+  margin-top: 10px;
+  margin-right: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 40px;
+  box-shadow: 0 0 1px 2px rgb(179, 174, 174);
+  background-color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-family: sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sortBy span:hover {
+  box-shadow: 0 0 1px 2px rgb(0, 0, 0);
+}
+
+/* styling entire product container/component */
+.products {
+  width: 100%;
+  height: 88.6%;
+  overflow-y: scroll;
+  /* background-color: lightgray; */
+}
+
+/* styling products in container/component */
+.listOfProducts {
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+
+/* styling each card/product
+.card {
+  box-shadow: 0 0 2px 1px black;
+} */

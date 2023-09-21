@@ -7,7 +7,7 @@ import {
     TotalPrize 
   } from "../components";
 import { Link } from "react-router-dom";
-import { removeAllFromCart, setCartsTotalPrize } from "../state-management/action";
+import { removeAllFromCart,  } from "../state-management/action";
 
 function CartPage({ products, dispatch}) {
   const { 

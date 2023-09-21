@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import { TotalPrize } from "../components";
 
 function Details({ products, cart, dispatch }) {
-  let totalPrize = products.totalPrize;
+  // let totalPrize = products.totalPrize;
   let { productId } = useParams();
   productId = parseInt(productId); //because params pass as string
 
@@ -26,16 +26,16 @@ function Details({ products, cart, dispatch }) {
   const [price, setPrice] = useState(product.price);
   
   //add to cart
-  const addToCartHandler = () => {
-    dispatch(toggleIsProductInCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    toast.success(" ⛱️Successfully Added Product To Cart 😛");
-  };
+  // const addToCartHandler = () => {
+  //   dispatch(toggleIsProductInCart(product)); //Add Product To Cart In Api And Redux Store Handler
+  //   toast.success(" ⛱️Successfully Added Product To Cart 😛");
+  // };
 
-  //remove to cart
-  const removefromCartHandler = () => {
-    dispatch(toggleIsProductInCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    toast.success("🔻Successfully Remove Product From Redux Cart😫")
-  };
+  // //remove to cart
+  // const removefromCartHandler = () => {
+  //   dispatch(toggleIsProductInCart(product)); //Add Product To Cart In Api And Redux Store Handler
+  //   toast.success("🔻Successfully Remove Product From Redux Cart😫")
+  // };
 
 
   const [quantity, setQuantity] = useState(product.quantity);

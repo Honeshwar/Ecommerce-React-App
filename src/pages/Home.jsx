@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { SortBy, Product } from "../components";
@@ -6,8 +6,8 @@ import styles from "../styles/home.module.css";
 import NavigationTopAndBottom from "../components/NavigationTopAndBottom";
 import Placeholders from "../components/Placeholders";
 import { Link } from "react-router-dom";
-import { addProductsHandler, addProductsToStore } from "../state-management/action";
-import { get } from "../api";
+// import { addProductsHandler, addProductsToStore } from "../state-management/action";
+// import { get } from "../api";
 
 
 function Home({ products, dispatch }) {

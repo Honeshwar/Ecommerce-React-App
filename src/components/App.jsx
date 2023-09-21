@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../styles/index.css";
 import { Home, CartPage } from "../pages";
 import Details from "../pages/Details";
-import { addProductsHandler, addProductsToStore } from "../state-management/action";
+import { addProductsToStore } from "../state-management/action";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import {Navbar, Error, Profile} from "./index.js";
@@ -35,7 +35,7 @@ function App({dispatch}) {
    }
    }
    fetch();
- }, []);
+ }, [dispatch]);
 
   return (
     <div className="App" >

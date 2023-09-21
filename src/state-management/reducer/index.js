@@ -4,15 +4,15 @@
 //rules-->3)no side effect can perform in function because side effect mainly responsible for changing thing outside,outside var use responsible but we know pure function can't use thing from outside and also can't change any outside variable/args, eg api call,dom manipulation etc...
 import { combineReducers } from "@reduxjs/toolkit";
 import {
-  ADD_CART_TO_STORE,
+  // ADD_CART_TO_STORE,
   ADD_PRODUCTS_TO_STORE,
   SORT_PRODUCTS_BY_PRICE,
   UN_SORT_PRODUCTS_TO_NORMAL,
-  UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
-  ADD_USER_TO_STORE,
+  // UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
+  // ADD_USER_TO_STORE,
   TOGGLE_ADD_TO_CART,
   CHANGE_PRODUCT_QUANTITY,
-  DELETE_PRODUCT_FROM_STORE,
+  // DELETE_PRODUCT_FROM_STORE,
   // INCREMENT_TOTAL_CART_PRIZE,
   // SET_TOTAL_CART_PRIZE,
   // REMOVE_ALL_FROM_CART,
@@ -123,9 +123,9 @@ function products(state = initialProductState, action) {
      */
 
 // reducer for user login
-const initialUserState = {
-  data:{}
-};
+// const initialUserState = {
+//   data:{}
+// };
 //reducer responsible for state change/state return
 // function user(state = initialUserState, action) {
 //   switch (action.type) {
@@ -150,10 +150,10 @@ export default combineReducers({
 
 //return an reducer func
   // // reducer for cart
-  const initialCartState = {
-    cartProducts: [],
-    cartSorted: false,
-  };
+  // const initialCartState = {
+  //   cartProducts: [],
+  //   cartSorted: false,
+  // };
   //reducer responsible for state change/state return
   // function cart(state = initialCartState, action) {
   //   switch (action.type) {

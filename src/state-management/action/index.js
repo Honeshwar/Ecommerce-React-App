@@ -1,7 +1,9 @@
 // action are plane js object with type field (and data that come from UI  {type:"dk",data:data}) that tell about event type(name)/ action type and data that come from UI  {type:"dk",data:data}
 // also create action creators function, so we don't have to do same work again and again( {type:"dk",data:data}, {type:"dk",data1:data1}...)// action creator !== action, are only function that help use in creating action obj
 
-import { post, remove, get, update } from "../../api";
+import { 
+  // post,
+   remove, get, update } from "../../api";
 
 //action type
 export const ADD_PRODUCTS_TO_STORE = "ADD_PRODUCTS_TO_STORE";

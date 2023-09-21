@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../styles/home.module.css";
 import {
-  sortCartByPrice,
+  // sortCartByPrice,
   sortProductsByPrice,
-  unSortCart,
+  // unSortCart,
   unSortProducts,
 } from "../state-management/action";
 
@@ -21,11 +21,11 @@ function SortBy({ dispatch, productsSorted, isCart, cartSorted }) {
   //sort/un-sort for cart
   const sortCartByPriceHandler = () => {
     if (cartSorted) {
-      dispatch(unSortCart()); //get action obj--call dispatch--MW--reducer call by store ,store pass action ,current state in reducer
+      // dispatch(unSortCart()); //get action obj--call dispatch--MW--reducer call by store ,store pass action ,current state in reducer
       return;
     }
 
-    dispatch(sortCartByPrice()); //if not sorted,than do sort
+    // dispatch(sortCartByPrice()); //if not sorted,than do sort
   };
 
   return (

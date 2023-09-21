@@ -1,63 +1,43 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { 
-  // decreaseCartTotalPrize, increaseCartTotalPrize, 
-  removeProductFromCart, setCartsTotalPrize, toogleAddToCart } from "../state-management/action";
+import { toggleIsProductInCart } from "../state-management/action";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function Cart({ product, dispatch,totalPrize}) {
+function Cart({ product, dispatch,totalPrice,setTotalPrice}) {
 
   //remove to cart
   const removeProductToCartHandler = () => {
-    dispatch(toogleAddToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    dispatch(setCartsTotalPrize(totalPrize - product.price * quantity));
-    toast.success("🔻Successfully Remove Product From Redux Cart😫")
+    dispatch(toggleIsProductInCart(product)); 
+    toast.success("🔻Successfully Remove Product")
   };
 
-  // //remove to cart
-  // const removeProductFromCartHandler = () => {
-  //   dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
-  //   toast.success('🔻Successfully Remove Product From  Cart 😫');
-  //   // success("🔻 Successfully Remove Product From  Cart 😫", {
-  //   //   title: "Remove Product From  Cart",
-  //   //   delay: "7000",
-  //   //   autoHide: false,
-  //   // });
-  // };
 
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product.quantity);
+
   //increment quantity
   const increaseQuantity = ()=>{
+    //set state async calls back run not when call wait in callback queue
     setQuantity(quantity+1);
-    dispatch(setCartsTotalPrize(totalPrize + product.price));
-
+   setTotalPrice(totalPrice+product.price);
   }
-  //increment quantity
+
+  //decrement quantity
   const decreaseQuantity = ()=>{
     setQuantity(quantity === 0?0:quantity-1);
     if(quantity === 0)return;
-    dispatch(setCartsTotalPrize(totalPrize - product.price));
+    // dispatch(setCartsTotalPrize(totalPrize - product.price));
+   setTotalPrice(totalPrice-product.price);
+
   }
-
-
-  // //remove to cart
-  // const RemoveProductToCartHandler = () => {
-  //   dispatch(removeProductFromCart(product.id)); //Add Product To Cart In Api And Redux Store Handler
-  //   success("🔻Successfully Remove Product From  Cart 😫", {
-  //     title: "Remove Product From  Cart",
-  //     delay: "7000",
-  //     autoHide: false,
-  //   });
-  // };
 
 
 
   return (
-    <div class="card "   style={{width: "18rem", margin:" 20px",boxShadow:"inset 0 0 6px 3px lightgray",padding:"4px", height:"fit-content"}}>
+    <div className="card" style={{width: "18rem", margin:" 20px",boxShadow:"inset 0 0 6px 3px lightgray",padding:"4px", height:"fit-content"}}>
     <Link to={`/product-details/${product.id}`}>
        <img
          style={{ maxHeight: "200px" }}
@@ -66,34 +46,31 @@ function Cart({ product, dispatch,totalPrize}) {
          alt={product.title}
        />
      </Link>
-     <div class="card-body" style={{display:"flex",flexDirection:"column",justifyContent:"space-evenly"}}>
+     <div className="card-body" style={{display:"flex",flexDirection:"column",justifyContent:"space-evenly"}}>
      <h5 className="card-title">{product.title}</h5>
-   {/* <p className="card-text" style={{ color: "gray" }}>
-     {product.description}
-   </p> */}
      <li className="list-group-item " >
        Price:
        <small style={{ color : "red"}}>
          {" Rs "} {product.price}
        </small>
      </li>
-    <ul class="pagination" style={{paddingTop:"10px"}}>
-        <li class="page-item" onClick={decreaseQuantity}>
-          <div class="page-link" aria-label="Previous">
+    <ul className="pagination" style={{paddingTop:"10px"}}>
+        <li className="page-item" onClick={decreaseQuantity}>
+          <div className="page-link" aria-label="Previous">
             <span aria-hidden="true"  >-</span> 
           </div>
         </li>
-        <li class="page-item">
-          <div class="page-link">{quantity}</div>
+        <li className="page-item">
+          <div className="page-link">{quantity}</div>
         </li>
-        <li class="page-item"  onClick={increaseQuantity}>
-          <div class="page-link" aria-label="Next">
+        <li className="page-item"  onClick={increaseQuantity}>
+          <div className="page-link" aria-label="Next">
             <span aria-hidden="true" >+</span>
           </div>
         </li>
       </ul> 
     <div >
-      <button type="button" class="btn btn-primary" style={{height:"fit-content",marginRight:"15px"}} onClick={removeProductFromCart}>{"Buy "} 
+      <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-primary" style={{height:"fit-content",marginRight:"15px"}} >{"Buy "} 
         <img
           style={{
             width: "30px",
@@ -104,7 +81,23 @@ function Cart({ product, dispatch,totalPrize}) {
           alt="Remove From Cart"
         />
       </button>
-      <button type="button" class="btn btn-danger" style={{height:"fit-content"}} onClick={removeProductToCartHandler}>{"Remove "} 
+      <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-fullscreen">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">Purchased Products</h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={removeProductToCartHandler}></button>
+            </div>
+            <div className="modal-body">
+              <img alt="purchased done"  className=" h-100 m-auto d-flex" src="https://st2.depositphotos.com/1688079/11277/i/450/depositphotos_112771578-stock-photo-done-validate-icon-soft-green.jpg"/>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={removeProductToCartHandler}>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" className="btn btn-danger" style={{height:"fit-content"}} onClick={removeProductToCartHandler}>{"Remove "} 
       <img
         style={{
           width: "30px",
@@ -122,90 +115,3 @@ function Cart({ product, dispatch,totalPrize}) {
 }
 
 export default Cart;
-///////////////////////////
-  //   <div class="card" style={{width: "18rem"}}>
-  //    <Link to={`/productDetail/${product.id}`}>
-  //       <img
-  //         style={{ maxHeight: "200px" }}
-  //         src={product.thumbnail}
-  //         className="card-img-top"
-  //         alt={product.title}
-  //       />
-  //     </Link>
-  // <div class="card-body">
-  //   <h5 className="card-title">{product.title}</h5>
-  //   <p className="card-text" style={{ color: "gray" }}>
-  //     {product.description}
-  //   </p>
-  //   <li className="list-group-item ">
-  //     Price:
-  //     <small style={{ color: "red" }}>
-  //       {" Rs "} {product.price}
-  //     </small>
-  //   </li>
-  // </div>
-  //   </div>
-////////////////////
-// <div
-    //   className="card"
-    //   style={{
-    //     width: "19rem",
-    //     marginBottom: "10px",
-    //     boxShadow: " 0 0 2px 1px black",
-    //   }}
-    // >
-    //   <Link to={`/productDetail/${product.id}`}>
-    //     <img
-    //       style={{ maxHeight: "200px" }}
-    //       src={product.thumbnail}
-    //       className="card-img-top"
-    //       alt={product.title}
-    //     />
-    //   </Link>
-    //   <div className="card-body">
-    //     <h5 className="card-title">{product.title}</h5>
-    //     <p className="card-text" style={{ color: "gray" }}>
-    //       {product.description}
-    //     </p>
-    //   </div>
-    //   <ul className="list-group list-group-flush">
-    //     <li className="list-group-item ">
-    //       Price:
-    //       <small style={{ color: "red" }}>
-    //         {" Rs "} {product.price}
-    //       </small>
-    //     </li>
-    //     <li className="list-group-item ">
-    //       {`Rating: `}
-    //       <small className="" style={{ color: "yellowgreen" }}>
-    //         {product.rating}
-    //       </small>
-    //     </li>
-    //   </ul>
-    //   <div className="card-body" style={{ maxHeight: "50px" }}>
-    //     <button
-    //       // href={removeProductFromCartHandler}
-    //       onClick={removeProductFromCartHandler}
-    //       className="card-link"
-    //       style={{
-    //         textDecoration: "none",
-    //         color: "black",
-    //         marginRight: "5px",
-    //         cursor: "pointer",
-    //         backgroundColor: "white",
-    //         border: "none",
-    //       }}
-    //     >
-    //       <img
-    //         style={{
-    //           width: "25px",
-    //           height: "25px",
-    //           marginLeft: "0px",
-    //         }}
-    //         src="https://cdn-icons-png.flaticon.com/128/5952/5952781.png"
-    //         alt="Add To Cart"
-    //       />{" "}
-    //       Remove From Cart
-    //     </button>
-    //   </div>
-    // </div>

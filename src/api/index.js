@@ -19,7 +19,7 @@ const customFetch = async function (url, { body, ...config }) {
     console.log("response: ",response)
     if(response.ok){
       const responseData = await response.json();
-      console.log("responseData at fetch ty/catch block: ",responseData);
+      console.log("responseData at fetch try/catch block: ",responseData);
       return {
         success: true, //this i do for my understanding of call in an component(if(res.success))
         products: responseData, //direct an array fake api/no success

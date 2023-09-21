@@ -6,15 +6,16 @@ import { combineReducers } from "@reduxjs/toolkit";
 import {
   ADD_CART_TO_STORE,
   ADD_PRODUCTS_TO_STORE,
-  DELETE_PRODUCT_FROM_STORE,
   SORT_PRODUCTS_BY_PRICE,
   UN_SORT_PRODUCTS_TO_NORMAL,
   UPDATE_PRODUCT_IN_STORE_IN_ALL_PRODUCTS,
   ADD_USER_TO_STORE,
   TOGGLE_ADD_TO_CART,
+  CHANGE_PRODUCT_QUANTITY,
+  DELETE_PRODUCT_FROM_STORE,
   // INCREMENT_TOTAL_CART_PRIZE,
-  SET_TOTAL_CART_PRIZE,
-  REMOVE_ALL_FROM_CART,
+  // SET_TOTAL_CART_PRIZE,
+  // REMOVE_ALL_FROM_CART,
   // ADD_TO_CART,
   // REMOVE_PRODUCT_FROM_CART,
   // SORT_CART_BY_PRICE,
@@ -26,16 +27,17 @@ const initialProductState = {
   allProducts: [],
   isProductsSorted: false,
   isCartProductsSorted:false,
-  totalPrize:0,
+  // totalPrize:0,
 };
 //reducer responsible for state change/state return
 function products(state = initialProductState, action) {
   switch (action.type) {
     case ADD_PRODUCTS_TO_STORE:
       for (const e of action.allProducts) {
-        if(!e.isCartProductsSorted){//undefined
+        // if(!e.isCartProductsSorted){//undefined
           e.isProductInCart = false;
-        }
+          e.quantity = 1;
+        // }
       }
       return {
         ...state,
@@ -61,7 +63,36 @@ function products(state = initialProductState, action) {
         allProducts: unSortedProducts,
         productsSorted: false,
       };
-    case DELETE_PRODUCT_FROM_STORE:
+    case TOGGLE_ADD_TO_CART:
+        const products = state.allProducts.map((e)=>{
+            if(action.product.id === e.id){
+              e.isProductInCart = ! e.isProductInCart;
+            }
+            return e;
+        })
+        return {
+          ...state,
+         allProducts:products
+        };
+    case CHANGE_PRODUCT_QUANTITY:{
+      const p = state.allProducts.map((product)=>{
+        if(product.id === action.payload.productId){
+          product.quantity = action.payload.quantity;
+        }
+        return product;
+      })
+      return {
+        ...state,
+        allProducts:p
+      };}
+      default:
+      return {
+        ...state,
+      };
+          
+  }
+}
+/** case DELETE_PRODUCT_FROM_STORE:
       // const index = state.allProducts.indexOf(action.product);
       const allProducts = state.allProducts.filter(
         (ele) => ele.id !== action.product.id
@@ -89,72 +120,41 @@ function products(state = initialProductState, action) {
         ...state,
         allProducts: Products,
       };
-    case TOGGLE_ADD_TO_CART:
-        const products = state.allProducts.map((e)=>{
-            if(action.product.id === e.id){
-              e.isProductInCart = ! e.isProductInCart;
-            }
-            return e;
-        })
-        return {
-          ...state,
-         allProducts:products
-        };
-    case SET_TOTAL_CART_PRIZE:
-      return {
-        ...state,
-          totalPrize:action.newTotal
-      };
-    case REMOVE_ALL_FROM_CART:
-        const p = state.allProducts.map((product)=>{
-          product.isProductInCart = false;
-          return product;
-        })
-      return {
-        ...state,
-         allProducts:p
-      };
-      
-      default:
-      return {
-        ...state,
-      };
-  }
-}
+     */
 
 // reducer for user login
 const initialUserState = {
   data:{}
 };
 //reducer responsible for state change/state return
-function user(state = initialUserState, action) {
-  switch (action.type) {
-    case ADD_USER_TO_STORE:
-      return {
-       data:{...action.userData}
-      };
-    //switch case have only one local scope inside switch(){...}
-    default:
-      return {
-        ...state,
-      };
-  }
-}
+// function user(state = initialUserState, action) {
+//   switch (action.type) {
+//     case ADD_USER_TO_STORE:
+//       return {
+//        data:{...action.userData}
+//       };
+//     //switch case have only one local scope inside switch(){...}
+//     default:
+//       return {
+//         ...state,
+//       };
+//   }
+// }
 
 export default combineReducers({
   products: products, //it callback it and pass state as state.key(allProduct)//here we set
-  user: user,
+  // user: user,
 
 });
 
 
 //return an reducer func
   // // reducer for cart
-  // const initialCartState = {
-  //   cartProducts: [],
-  //   cartSorted: false,
-  // };
-  // //reducer responsible for state change/state return
+  const initialCartState = {
+    cartProducts: [],
+    cartSorted: false,
+  };
+  //reducer responsible for state change/state return
   // function cart(state = initialCartState, action) {
   //   switch (action.type) {
   //     case ADD_CART_TO_STORE:

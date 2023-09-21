@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {
-  AddProductToCart,
-  removeProductFromCart,
-  setCartsTotalPrize,
-  toogleAddToCart,
-  toogleAddToCartHandler,
+  // setCartsTotalPrize,
+  // toogleAddToCart,
+  // AddProductToCart,
+  // removeProductFromCart,
+  // toogleAddToCartHandler,
 } from "../state-management/action";
-import { success } from "react-toast-notification";
-import { useState } from "react";
+// import { success } from "react-toast-notification";
+// import { useState } from "react";
 
-import { ToastContainer, toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Product({ product, cart, dispatch ,totalPrize}) {
@@ -26,7 +26,7 @@ function Product({ product, cart, dispatch ,totalPrize}) {
 //  })());
 
 
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
 
   //add to cart
   // const addToCartHandler = () => {
@@ -56,25 +56,25 @@ function Product({ product, cart, dispatch ,totalPrize}) {
 
   // };
 
-  const addProductToCartHandler = () => {
-    dispatch(toogleAddToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    dispatch(setCartsTotalPrize(totalPrize + product.price * quantity));
-    toast.success(" ⛱️Successfully Added Product To Cart 😛");
-  };
+  // const addProductToCartHandler = () => {
+  //   dispatch(toogleAddToCart(product)); //Add Product To Cart In Api And Redux Store Handler
+  //   dispatch(setCartsTotalPrize(totalPrize + product.price * quantity));
+  //   toast.success(" ⛱️Successfully Added Product To Cart 😛");
+  // };
 
   //remove to cart
-  const removeProductToCartHandler = () => {
-    dispatch(toogleAddToCart(product)); //Add Product To Cart In Api And Redux Store Handler
-    dispatch(setCartsTotalPrize(totalPrize - product.price * quantity));
-    toast.success("🔻Successfully Remove Product From Redux Cart😫")
-  };
-
+  // const removeProductToCartHandler = () => {
+  //   dispatch(toogleAddToCart(product)); //Add Product To Cart In Api And Redux Store Handler
+  //   dispatch(setCartsTotalPrize(totalPrize - product.price * quantity));
+  //   toast.success("🔻Successfully Remove Product From Redux Cart😫")
+  // };
+ 
   //increment quantity
-  const increaseQuantity = ()=>setQuantity(quantity+1);
+  // const increaseQuantity = ()=>setQuantity(quantity+1);
 
   
   //increment quantity
-  const decreaseQuantity = ()=>setQuantity(quantity == 0?0:quantity-1);
+  // const decreaseQuantity = ()=>setQuantity(quantity == 0?0:quantity-1);
 
 
   return (

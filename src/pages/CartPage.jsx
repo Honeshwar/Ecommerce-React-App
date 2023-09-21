@@ -2,12 +2,20 @@ import React from "react";
 import { connect } from "react-redux";
 import "../styles/totalPrize.css";
 import styles from "../styles/home.module.css";
-import { SortBy, Cart, Product, TotalPrize } from "../components";
+import { 
+  // SortBy,
+  // Product,
+  Cart, 
+    TotalPrize 
+  } from "../components";
 import { Link } from "react-router-dom";
 import { removeAllFromCart, setCartsTotalPrize } from "../state-management/action";
 
 function AddToCart({ products, dispatch}) {
-  const { allProducts, isCartProductsSorted } = products;
+  const { 
+    allProducts, 
+    // isCartProductsSorted 
+  } = products;
   let cartProducts = [];let i=0;
   for (const e of allProducts) {
     if(e.isProductInCart){
@@ -35,7 +43,7 @@ function AddToCart({ products, dispatch}) {
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={proceedToPay}></button>
             </div>
             <div class="modal-body">
-              <img  className=" h-100 m-auto d-flex" src="https://st2.depositphotos.com/1688079/11277/i/450/depositphotos_112771578-stock-photo-done-validate-icon-soft-green.jpg"/>
+              <img alt="purchased done"  className=" h-100 m-auto d-flex" src="https://st2.depositphotos.com/1688079/11277/i/450/depositphotos_112771578-stock-photo-done-validate-icon-soft-green.jpg"/>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={proceedToPay}>Close</button>
@@ -93,32 +101,32 @@ const WrapperCartComponent = connect(
 export default WrapperCartComponent;
 
 
-{/*  <SortBy isCart={true} isCartProductsSorted={isCartProductsSorted} dispatch={dispatch} />
+//   <SortBy isCart={true} isCartProductsSorted={isCartProductsSorted} dispatch={dispatch} />
      
-<div className={styles.listOfCartProducts}>
-              {cartProducts?.map((product, index) => (
-                <Cart key={index} product={product} dispatch={dispatch} totalPrize={products.totalPrize} />
-              ))}
+// <div className={styles.listOfCartProducts}>
+//               {cartProducts?.map((product, index) => (
+//                 <Cart key={index} product={product} dispatch={dispatch} totalPrize={products.totalPrize} />
+//               ))}
 
-              {cartProducts.length === 0 && (
-                <div
-                  style={{
-                    width:"100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems:"center",
+//               {cartProducts.length === 0 && (
+//                 <div
+//                   style={{
+//                     width:"100%",
+//                     display: "flex",
+//                     flexDirection: "column",
+//                     justifyContent: "center",
+//                     alignItems:"center",
                   
-                  }}
-                >
-                  <h1 style={{ color: "white", fontFamily: "cursive", textAlign:"center" }}>
-                    No product is added to cart yet...
-                  </h1>
-                  <Link to="/" className="btn btn-warning">
-                    Go Back To Home
-                  </Link>
-                </div>
-              )}
-      </div>
-    </div>
-    <TotalPrize totalPrize={products.totalPrize} /> */}
+//                   }}
+//                 >
+//                   <h1 style={{ color: "white", fontFamily: "cursive", textAlign:"center" }}>
+//                     No product is added to cart yet...
+//                   </h1>
+//                   <Link to="/" className="btn btn-warning">
+//                     Go Back To Home
+//                   </Link>
+//                 </div>
+//               )}
+//       </div>
+//     </div>
+//     <TotalPrize totalPrize={products.totalPrize} /> 

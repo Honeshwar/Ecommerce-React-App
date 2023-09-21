@@ -10,7 +10,7 @@ export default  function Profile() {
                       <div class="col-sm-4 bg-c-lite-green user-profile">
                       <div class="card-block text-center text-white">
                       <div class="m-b-25">
-                      <img src="https://cdn-icons-png.flaticon.com/128/9775/9775776.png" class="img-radius" alt="User-Profile-Image"/>
+                      <img src="https://cdn-icons-png.flaticon.com/128/9775/9775776.png" class="img-radius" alt="User Profile"/>
                       </div>
                       <h6 class="f-w-600">Hembo Tingor</h6>
                       <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>

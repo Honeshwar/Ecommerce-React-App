@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { SortBy, Product ,TotalPrize} from "../components";
+import { SortBy, Product } from "../components";
 import styles from "../styles/home.module.css";
 import NavigationTopAndBottom from "../components/NavigationTopAndBottom";
 import Placeholders from "../components/Placeholders";
+import { Link } from "react-router-dom";
 
 
-function Home({ products, dispatch ,totalPrize}) {
+function Home({ products, dispatch }) {
   const { allProducts, productsSorted } = products;
   const dummyProducts = [1,2,3,4,5,6,7,8,9,10];
   return (
@@ -16,7 +17,7 @@ function Home({ products, dispatch ,totalPrize}) {
     <div className={styles.products} style={{ backgroundColor: "cadetblue" }}>
       <SortBy productsSorted={productsSorted} dispatch={dispatch} />
       <div className={styles.listOfProducts}>
-       {!allProducts && allProducts.length == 0?
+       {!allProducts && allProducts.length === 0?
         dummyProducts.map((e)=>( <Placeholders key={e}/>))
         :
         allProducts?.map((product, index) => (
@@ -34,7 +35,7 @@ function Home({ products, dispatch ,totalPrize}) {
     {/* <!-- Footer --> */}
  
     <footer class="text-center text-lg-start text-muted  mt-3" id="footer" style={{backgroundColor:"rgb(0, 71, 73,.4)"}}>
-      {/* <!-- Section: Links  --> */}
+      {/* <!-- Section: Links  --> */} 
       <section class="">
         <div class="container text-center text-md-start pt-4 pb-4">
           {/* <!-- Grid row --> */}
@@ -42,9 +43,9 @@ function Home({ products, dispatch ,totalPrize}) {
             {/* <!-- Grid column --> */}
             <div class="col-12 col-lg-3 col-sm-12 mb-2">
               {/* <!-- Content --> */}
-              <a href="https://mdbootstrap.com/" target="_blank" class="text-white h2">
+              <Link to={"/"} target="_blank" class="text-white h2">
                 eCommerce
-              </a>
+              </Link>
               <p class="mt-1 text-white">
                 © 2023 Copyright: eCommerce.com
                 {/* <br/>ecommerce-react-app-1.netlify.app */}

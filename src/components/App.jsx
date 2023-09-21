@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../styles/index.css";
-import { Home, AddToCart } from "../pages";
+import { Home, CartPage } from "../pages";
 import Details from "../pages/Details";
 import { addProductsHandler } from "../state-management/action";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import {Navbar, Error, Profile} from "./index.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -18,7 +18,7 @@ function App({ dispatch,user,products }) {
     localStorage.setItem("PRODUCTS",products);
     //add user to localstorage
     // localStorage.setItem(USER,JSON.stringify(user));
-  }, [dispatch]);
+  }, [dispatch,products]);
 
   return (
     <div className="App" >
@@ -31,7 +31,7 @@ function App({ dispatch,user,products }) {
         <Routes>
           {/*it help in finding exact path/url by default */}
           <Route path="/" element={<Home/>}></Route>
-          <Route path="/cart" element={<AddToCart />}></Route>
+          <Route path="/cart" element={<CartPage />}></Route>
           <Route
             path="/product-details/:productId"
             element={<Details />}

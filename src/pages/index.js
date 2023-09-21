@@ -1,4 +1,4 @@
 import Home from "./Home";
-import AddToCart from "./AddToCart";
+import CartPage from "./CartPage";
 
-export { Home, AddToCart };
+export { Home, CartPage };

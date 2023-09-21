@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { decreaseCartTotalPrize, increaseCartTotalPrize, removeProductFromCart, setCartsTotalPrize, toogleAddToCart } from "../state-management/action";
-import { ToastContainer, toast } from 'react-toastify';
+import { 
+  // decreaseCartTotalPrize, increaseCartTotalPrize, 
+  removeProductFromCart, setCartsTotalPrize, toogleAddToCart } from "../state-management/action";
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -36,8 +38,8 @@ function Cart({ product, dispatch,totalPrize}) {
   }
   //increment quantity
   const decreaseQuantity = ()=>{
-    setQuantity(quantity == 0?0:quantity-1);
-    if(quantity == 0)return;
+    setQuantity(quantity === 0?0:quantity-1);
+    if(quantity === 0)return;
     dispatch(setCartsTotalPrize(totalPrize - product.price));
   }
 
@@ -77,17 +79,17 @@ function Cart({ product, dispatch,totalPrize}) {
      </li>
     <ul class="pagination" style={{paddingTop:"10px"}}>
         <li class="page-item" onClick={decreaseQuantity}>
-          <a class="page-link" href="#" aria-label="Next">
+          <div class="page-link" aria-label="Previous">
             <span aria-hidden="true"  >-</span> 
-          </a>
+          </div>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">{quantity}</a>
+          <div class="page-link">{quantity}</div>
         </li>
         <li class="page-item"  onClick={increaseQuantity}>
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">+</span>
-          </a>
+          <div class="page-link" aria-label="Next">
+            <span aria-hidden="true" >+</span>
+          </div>
         </li>
       </ul> 
     <div >

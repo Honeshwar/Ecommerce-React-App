@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { success } from "react-toast-notification";
+import {  useParams } from "react-router-dom";
+// import { success } from "react-toast-notification";
 
 import {
-  TOGGLE_ADD_TO_CART,
   setCartsTotalPrize,
   toogleAddToCart,
-  toogleAddToCartHandler
+  // TOGGLE_ADD_TO_CART,
+  // toogleAddToCartHandler
 } from "../state-management/action";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
@@ -16,11 +16,12 @@ function Details({ products, cart, dispatch }) {
   let totalPrize = products.totalPrize;
   let { productId } = useParams();
   productId = parseInt(productId); //because params pass as string
-  const [isEdit, setIsEdit] = useState(false);
-  const [title, setTitle] = useState("No Title");
-  const [description, setDescription] = useState("No Description");
+  // const [isEdit, setIsEdit] = useState(false);
+  // const [title, setTitle] = useState("No Title");
+  // const [description, setDescription] = useState("No Description");
   // const [price, setPrice] = useState("No price");
   // const [rating, setRating] = useState("No Rating");
+
 
  
 
@@ -113,18 +114,18 @@ function Details({ products, cart, dispatch }) {
   }
   //increment quantity
   const decreaseQuantity = ()=>{
-    setQuantity(quantity == 0?0:quantity-1);
+    setQuantity(quantity === 0?0:quantity-1);
     if(quantity-1 < 0)return;
     let p = product.price * (quantity-1);
     setPrice(p);
-    if(quantity == 0)return;
+    if(quantity === 0)return;
     dispatch(setCartsTotalPrize(totalPrize - product.price));
   }
 
 const removeProductFromCart = ()=>{
   dispatch(setCartsTotalPrize(totalPrize - price));
   dispatch(toogleAddToCart(product));
-}
+} 
 
   return (
 
@@ -135,8 +136,8 @@ const removeProductFromCart = ()=>{
     <div class="row gx-5">
       <aside class="col-lg-6">
         <div class=" mb-3 d-flex justify-content-center ">
-          <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href={product.thumbnail}>
-            <img style={{maxWidth:"450px", height: "400px", margin: "auto", filter: "invert(0)",boxShadow:"inset 0 0 5px 4px lightgray"}} class="rounded-4 fit" src={product.thumbnail}/>
+          <a data-fslightbox="mygalley" class="rounded-4" target="_blank" rel="noreferrer" data-type="image" href={product.thumbnail}>
+            <img alt={"product thumbnail"} style={{maxWidth:"450px", height: "400px", margin: "auto", filter: "invert(0)",boxShadow:"inset 0 0 5px 4px lightgray"}} class="rounded-4 fit" src={product.thumbnail}/>
           </a>
         </div>
        <div class=" mt-5 mb-5 d-flex justify-content-center ">
@@ -233,7 +234,7 @@ const removeProductFromCart = ()=>{
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={removeProductFromCart}></button>
               </div>
               <div class="modal-body">
-                <img  className=" h-100 m-auto d-flex" src="https://st2.depositphotos.com/1688079/11277/i/450/depositphotos_112771578-stock-photo-done-validate-icon-soft-green.jpg"/>
+                <img alt="purchased done" className=" h-100 m-auto d-flex" src="https://st2.depositphotos.com/1688079/11277/i/450/depositphotos_112771578-stock-photo-done-validate-icon-soft-green.jpg"/>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onClick={removeProductFromCart}>Close</button>
@@ -291,7 +292,7 @@ const removeProductFromCart = ()=>{
         {/* <!-- Grid column --> */}
         <div class="col-12 col-lg-3 col-sm-12 mb-2">
           {/* <!-- Content --> */}
-          <a href="https://mdbootstrap.com/" target="_blank" class="text-white h2">
+          <a href="https://mdbootstrap.com/" target="_blank" rel="noreferrer" class="text-white h2">
             eCommerce
           </a>
           <p class="mt-1 text-white">

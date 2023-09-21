@@ -5,10 +5,10 @@ import "../styles/navbar.css";
 function Navbar({totalPrize}) {
 
   return (
-    <div className="navbar-component">
+    <div className="navbar-component" id={"navbar"}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link
+          <Link 
             style={{ color: "green", fontSize: "1.5rem" }}
             className="navbar-brand"
             to="/"

@@ -15,7 +15,7 @@ function Placeholders() {
             <span class="placeholder col-6"></span>
             <span class="placeholder col-8"></span>
         </p>
-        <a href="#" tabindex="-1" class="btn btn-primary disabled placeholder col-6"></a>
+        <button tabindex="-1" class="btn btn-primary disabled placeholder col-6"></button>
     </div>
 </div>
   )

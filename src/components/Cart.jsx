@@ -11,6 +11,7 @@ function Cart({ product, dispatch,totalPrice,setTotalPrice}) {
   //remove to cart
   const removeProductToCartHandler = () => {
     dispatch(toggleIsProductInCart(product)); 
+    setTotalPrice(totalPrice - product.price * qantity);
     toast.success("🔻Successfully Remove Product")
   };
 
